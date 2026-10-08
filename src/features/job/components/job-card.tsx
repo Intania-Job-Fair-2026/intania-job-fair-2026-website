@@ -18,7 +18,7 @@ export const JobCard = ({ job }: { job: Job }) => {
   return (
     <ListingCard>
       <div className="flex w-full items-start gap-4">
-        <div className="flex w-[248px] shrink-0 flex-col gap-2">
+        <div className="flex min-w-0 flex-1 flex-col gap-2">
           <div className="flex w-full items-start gap-2">
             <div className="relative size-12 shrink-0">
               <Image src={job.logo} alt="" fill sizes="48px" className="object-cover" />

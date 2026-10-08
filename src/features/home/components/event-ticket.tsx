@@ -13,7 +13,7 @@ const dayClass =
 
 export const EventTicket = () => {
   return (
-    <div className="flex w-full flex-col px-6">
+    <div className="mx-auto flex w-full max-w-[480px] flex-col px-6">
       <section className="relative flex w-full flex-col items-center gap-6 overflow-clip rounded-2xl bg-white pb-8">
         <p
           aria-hidden
@@ -22,13 +22,13 @@ export const EventTicket = () => {
           2026
         </p>
 
-        <div className="flex w-full items-center justify-center overflow-clip bg-red-700 px-[43px] py-3">
-          <p className="text-trim text-center font-display text-2xl leading-[1.2] font-bold tracking-[3.84px] whitespace-nowrap text-white">
+        <div className="flex w-full items-center justify-center overflow-clip bg-red-700 px-4 py-3 min-[390px]:px-[43px]">
+          <p className="text-trim text-center font-display text-[clamp(1.125rem,5.6vw,1.5rem)] leading-[1.2] font-bold tracking-[0.16em] whitespace-nowrap text-white">
             Flight to The Future
           </p>
         </div>
 
-        <h1 className="text-trim relative w-full text-center font-heading text-5xl leading-[1.2] font-bold tracking-[-2.88px] text-ink">
+        <h1 className="text-trim relative w-full text-center font-heading text-[clamp(2.25rem,12vw,3rem)] leading-[1.2] font-bold tracking-[-0.06em] text-ink">
           Intania{' '}
           <span className="bg-linear-to-b from-red-500 to-red-700 bg-clip-text text-transparent">
             Job Fair

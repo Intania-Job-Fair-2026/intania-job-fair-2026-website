@@ -62,7 +62,9 @@ export const Directory = ({
           </button>
         </div>
 
-        <div className="flex w-full flex-col gap-6 px-6">{children}</div>
+        <div className="grid w-full grid-cols-1 gap-6 px-6 md:grid-cols-2 lg:grid-cols-3">
+          {children}
+        </div>
       </section>
 
       <Pagination page={page} totalPages={totalPages} onChange={onPageChange} />

@@ -16,7 +16,7 @@ export const SearchBar = ({
   placeholder = 'ค้นหา บูธ บริษัท ตำแหน่ง หรือที่ตั้ง',
 }: SearchBarProps) => {
   return (
-    <div className="flex w-full items-center justify-center gap-2 px-6 py-4">
+    <div className="mx-auto flex w-full max-w-2xl items-center justify-center gap-2 px-6 py-4">
       <label className="flex h-12 min-w-0 flex-1 items-center gap-2 overflow-clip rounded-3xl bg-white px-4 py-2">
         <Search aria-hidden size={20} className="shrink-0 text-blue-700" />
         <input

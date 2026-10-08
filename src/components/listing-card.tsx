@@ -23,7 +23,7 @@ export const ListingCard = ({
 
 export const TagList = ({ tags }: { tags: string[] }) => {
   return (
-    <ul className="flex w-full items-center gap-1">
+    <ul className="flex w-full flex-wrap items-center gap-1">
       {tags.map((tag) => (
         <li
           key={tag}
@@ -64,7 +64,7 @@ export const BoothCode = ({ booth }: { booth: string }) => {
           />
         </div>
       </div>
-      <div className="flex items-center justify-center p-1">
+      <div className="flex shrink-0 items-center justify-center p-1">
         <p className="text-trim font-display text-2xl leading-[1.2] font-bold tracking-[3.84px] whitespace-nowrap text-red-900">
           {booth}
         </p>

@@ -24,8 +24,8 @@ export const FeaturedSection = ({
   return (
     <section className="flex w-full flex-col items-center gap-6">
       <SectionHeader title={title} link={{ href, label: linkLabel }} />
-      <div className="flex w-full flex-col gap-4 px-6">{children}</div>
-      <div className="w-full px-6">
+      <div className="grid w-full grid-cols-1 gap-4 px-6 md:grid-cols-2">{children}</div>
+      <div className="w-full px-6 md:max-w-md">
         <ButtonLink href={href} iconEnd={ArrowRight} className="w-full">
           {buttonLabel}
         </ButtonLink>

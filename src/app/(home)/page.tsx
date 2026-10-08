@@ -24,6 +24,7 @@ export default function HomePage() {
           <SectionHeader title="แผนผังบูธบริษัท" link={{ href: '/booths', label: 'บูธทั้งหมด' }} />
         }
       />
+
       <FeaturedSection
         title="บริษัทที่น่าสนใจ"
         href="/companies"

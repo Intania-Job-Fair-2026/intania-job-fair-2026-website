@@ -6,8 +6,8 @@ import type { Company } from '../types'
 export const CompanyCard = ({ company }: { company: Company }) => {
   return (
     <ListingCard className="shadow-card">
-      <div className="flex h-[136px] w-full items-start gap-4">
-        <div className="flex w-[248px] shrink-0 flex-col gap-2">
+      <div className="flex min-h-[136px] w-full items-start gap-4">
+        <div className="flex min-w-0 flex-1 flex-col gap-2">
           <div className="flex w-full items-center gap-2">
             <div className="relative size-12 shrink-0">
               <Image src={company.logo} alt="" fill sizes="48px" className="object-cover" />
