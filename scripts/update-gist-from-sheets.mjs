@@ -69,6 +69,7 @@ async function main() {
     company['ฝึก ปี 1 2'] = company['ฝึก ปี 1 2'] == 'TRUE'
     company['มา 28'] = company['มา 28'] == 'เข้า 28'
     company['มา 29'] = company['มา 29'] == 'เข้า 29'
+    company['จำนวนบูธ'] = Number(company['จำนวนบูธ'])
     Object.keys(CompanyKeyMap).forEach((oldKey) => {
       if (oldKey in company) {
         const newKey = CompanyKeyMap[oldKey]
@@ -77,19 +78,10 @@ async function main() {
       }
     })
   })
-  console.log(companiesCsv)
-  // console.log(companeyCategorylist)
   const files = {
     'companies.json': { content: toJsonString(companiesCsv) },
     'companiesCategory.json': { content: toJsonString(companeyCategorylist) },
   }
-
-  // if (majorsCsv) {
-  //   files['majors.json'] = { content: toJsonString(majorsCsv) }
-  // }
-  // if (jobTypesCsv) {
-  //   files['jobTypes.json'] = { content: toJsonString(jobTypesCsv) }
-  // }
 
   await updateGist(files)
   console.log(`Updated gist ${GIST_ID} with ${Object.keys(files).join(', ')}`)

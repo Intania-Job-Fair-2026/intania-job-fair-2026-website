@@ -1,4 +1,4 @@
-import type { Company, Job } from '@/types/schema'
+import type { Company, CompanyCategory } from '@/types/schema'
 
 const GIST_RAW_BASE = process.env.NEXT_PUBLIC_GIST_RAW_BASE
 
@@ -24,6 +24,6 @@ export async function fetchCompanies(): Promise<Company[]> {
   return fetchJson<Company[]>('companies.json')
 }
 
-export async function fetchJobs(): Promise<Job[]> {
-  return fetchJson<Job[]>('jobs.json')
+export async function fetchCompanyCategory(): Promise<CompanyCategory> {
+  return fetchJson<CompanyCategory>('companiesCategory.json')
 }
