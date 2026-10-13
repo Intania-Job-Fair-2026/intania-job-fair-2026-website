@@ -7,7 +7,6 @@ import { usePathname } from 'next/navigation'
 const items = [
   { label: 'Home', href: '/home', icon: 'home' },
   { label: 'Booths', href: '/home/booths', icon: 'booths' },
-  { label: 'Jobs', href: '/home/jobs', icon: 'jobs' },
   { label: 'Companies', href: '/home/companies', icon: 'companies' },
 ] as const
 
@@ -41,7 +40,7 @@ function NavIcon({ icon }: { icon: NavItem['icon'] }) {
 
 function NavStamp({ item, active }: { item: NavItem; active: boolean }) {
   return (
-    <li className="relative isolate flex h-[90px] min-w-0 flex-1 overflow-hidden bg-[#f7e7e7] ">
+    <li className="relative isolate flex h-[90px] max-w-[90px] flex-1 overflow-hidden bg-[#f7e7e7] ">
       <Link
         href={item.href}
         aria-current={active ? 'page' : undefined}
@@ -55,27 +54,27 @@ function NavStamp({ item, active }: { item: NavItem; active: boolean }) {
 
       {/* Perforation */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0">
-        <div className="absolute -inset-x-1.5 top-0 flex -translate-y-1/2 justify-between">
+        <div className="absolute -inset-x-1.5 top-0 flex -translate-y-1/2 justify-between color">
           {Array.from({ length: 6 }, (_, index) => (
-            <span key={index} className="h-3 w-3 shrink-0 rounded-full bg-[#f3f3f3]" />
+            <span key={index} className="h-3 w-3 shrink-0 rounded-full bg-white" />
           ))}
         </div>
 
         <div className="absolute -inset-x-1.5 bottom-0 flex translate-y-1/2 justify-between">
           {Array.from({ length: 6 }, (_, index) => (
-            <span key={index} className="h-3 w-3 shrink-0 rounded-full bg-[#f3f3f3]" />
+            <span key={index} className="h-3 w-3 shrink-0 rounded-full bg-white " />
           ))}
         </div>
 
         <div className="absolute -inset-y-1.5 left-0 flex -translate-x-1/2 flex-col justify-between">
           {Array.from({ length: 6 }, (_, index) => (
-            <span key={index} className="h-3 w-3 shrink-0 rounded-full bg-[#f3f3f3]" />
+            <span key={index} className="h-3 w-3 shrink-0 rounded-full bg-white" />
           ))}
         </div>
 
         <div className="absolute -inset-y-1.5 right-0 flex translate-x-1/2 flex-col justify-between">
           {Array.from({ length: 6 }, (_, index) => (
-            <span key={index} className="h-3 w-3 shrink-0 rounded-full bg-[#f3f3f3]" />
+            <span key={index} className="h-3 w-3 shrink-0 rounded-full bg-white" />
           ))}
         </div>
       </div>
@@ -99,8 +98,8 @@ export function Navbar() {
   const pathname = usePathname()
 
   return (
-    <nav aria-label="Main navigation" className="w-full max-w-[370px]">
-      <ul className="flex h-[90px] w-full">
+    <nav aria-label="Main navigation" className="w-full max-w-screen">
+      <ul className="flex h-[120px] w-[402px] justify-around items-center bg-white">
         {items.map((item) => (
           <NavStamp key={item.href} item={item} active={pathname === item.href} />
         ))}
