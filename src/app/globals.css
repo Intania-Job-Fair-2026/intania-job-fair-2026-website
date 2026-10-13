@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 
 :root {
-  --background: #ffffff;
+  --background: #f3f3f3;
   --foreground: #171717;
 }
 
@@ -10,13 +10,10 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-thai: var(--font-ibm-plex-thai);
+  --font-benguiat: var(--font-benguiat);
+  --font-heading: var(--font-helvetica-world);
+  --font-thai-display: var(--font-fc-iconic);
 }
 
 body {
