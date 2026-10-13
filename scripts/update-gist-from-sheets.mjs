@@ -12,9 +12,6 @@ const env = (name, required = true) => {
 const GIST_TOKEN = env('GIST_TOKEN')
 const GIST_ID = env('GIST_ID')
 const COMPANIES_CSV_URL = env('COMPANIES_CSV_URL')
-const JOBS_CSV_URL = env('JOBS_CSV_URL')
-const MAJORS_CSV_URL = env('MAJORS_CSV_URL', false)
-const JOBTYPES_CSV_URL = env('JOBTYPES_CSV_URL', false)
 
 async function fetchCsv(url) {
   const res = await fetch(url)
@@ -43,24 +40,47 @@ async function updateGist(files) {
   }
 }
 
-async function main() {
-  const [companiesCsv, jobsCsv, majorsCsv, jobTypesCsv] = await Promise.all([
-    fetchCsv(COMPANIES_CSV_URL),
-    fetchCsv(JOBS_CSV_URL),
-    MAJORS_CSV_URL ? fetchCsv(MAJORS_CSV_URL) : Promise.resolve(null),
-    JOBTYPES_CSV_URL ? fetchCsv(JOBTYPES_CSV_URL) : Promise.resolve(null),
-  ])
+const CompanyKeyMap = {
+  'ชื่อบริษัท (ภาษาไทย)': 'companyName_th',
+  'ชื่อบริษัท (English)': 'companyName_en',
+  ชื่อประชาสัมพันธ์: 'promoteName',
+  'มา 28': 'come28',
+  'มา 29': 'come29',
+  จำนวนบูธ: 'bootCount',
+  'หมายเหตุ (request)': 'note',
+  สมัครงาน: 'hiring',
+  'ฝึก ปี 3': 'internship3',
+  'ฝึก ปี 1 2': 'internship12',
+  หมวดหมู่: 'category',
+  เกี่ยวกับบริษัท: 'detail',
+}
 
+async function main() {
+  const [companiesCsv] = await Promise.all([fetchCsv(COMPANIES_CSV_URL)])
+  const companeyCategorylist = []
+  companiesCsv.forEach((company) => {
+    const category = company['หมวดหมู่']
+    if (!companeyCategorylist.includes(category)) {
+      companeyCategorylist.push(category)
+    }
+    delete company['']
+    company['สมัครงาน'] = company['สมัครงาน'] == 'TRUE'
+    company['ฝึก ปี 3'] = company['ฝึก ปี 3'] == 'TRUE'
+    company['ฝึก ปี 1 2'] = company['ฝึก ปี 1 2'] == 'TRUE'
+    company['มา 28'] = company['มา 28'] == 'เข้า 28'
+    company['มา 29'] = company['มา 29'] == 'เข้า 29'
+    company['จำนวนบูธ'] = Number(company['จำนวนบูธ'])
+    Object.keys(CompanyKeyMap).forEach((oldKey) => {
+      if (oldKey in company) {
+        const newKey = CompanyKeyMap[oldKey]
+        company[newKey] = company[oldKey]
+        delete company[oldKey]
+      }
+    })
+  })
   const files = {
     'companies.json': { content: toJsonString(companiesCsv) },
-    'jobs.json': { content: toJsonString(jobsCsv) },
-  }
-
-  if (majorsCsv) {
-    files['majors.json'] = { content: toJsonString(majorsCsv) }
-  }
-  if (jobTypesCsv) {
-    files['jobTypes.json'] = { content: toJsonString(jobTypesCsv) }
+    'companiesCategory.json': { content: toJsonString(companeyCategorylist) },
   }
 
   await updateGist(files)
