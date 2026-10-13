@@ -12,6 +12,8 @@ const env = (name, required = true) => {
 const GIST_TOKEN = env('GIST_TOKEN')
 const GIST_ID = env('GIST_ID')
 const COMPANIES_CSV_URL = env('COMPANIES_CSV_URL')
+const BOOTMAP_DAY1_CSV_URL = env('BOOTMAP_DAY1_CSV_URL')
+const BOOTMAP_DAY2_CSV_URL = env('BOOTMAP_DAY2_CSV_URL')
 
 async function fetchCsv(url) {
   const res = await fetch(url)
@@ -53,10 +55,15 @@ const CompanyKeyMap = {
   'ฝึก ปี 1 2': 'internship12',
   หมวดหมู่: 'category',
   เกี่ยวกับบริษัท: 'detail',
+  ชื่อบูธ: 'bootName',
 }
 
 async function main() {
-  const [companiesCsv] = await Promise.all([fetchCsv(COMPANIES_CSV_URL)])
+  const [companiesCsv, Bootmap1, Bootmap2] = await Promise.all([
+    fetchCsv(COMPANIES_CSV_URL),
+    fetchCsv(BOOTMAP_DAY1_CSV_URL),
+    fetchCsv(BOOTMAP_DAY2_CSV_URL),
+  ])
   const companeyCategorylist = []
   companiesCsv.forEach((company) => {
     const category = company['หมวดหมู่']
@@ -78,9 +85,31 @@ async function main() {
       }
     })
   })
+  Bootmap1.forEach((boot) => {
+    boot['จำนวนบูธ'] = Number(boot['จำนวนบูธ'])
+    Object.keys(CompanyKeyMap).forEach((oldKey) => {
+      if (oldKey in boot) {
+        const newKey = CompanyKeyMap[oldKey]
+        boot[newKey] = boot[oldKey]
+        delete boot[oldKey]
+      }
+    })
+  })
+  Bootmap2.forEach((boot) => {
+    boot['จำนวนบูธ'] = Number(boot['จำนวนบูธ'])
+    Object.keys(CompanyKeyMap).forEach((oldKey) => {
+      if (oldKey in boot) {
+        const newKey = CompanyKeyMap[oldKey]
+        boot[newKey] = boot[oldKey]
+        delete boot[oldKey]
+      }
+    })
+  })
   const files = {
     'companies.json': { content: toJsonString(companiesCsv) },
     'companiesCategory.json': { content: toJsonString(companeyCategorylist) },
+    'bootmap1.json': { content: toJsonString(Bootmap1) },
+    'bootmap2.json': { content: toJsonString(Bootmap2) },
   }
 
   await updateGist(files)

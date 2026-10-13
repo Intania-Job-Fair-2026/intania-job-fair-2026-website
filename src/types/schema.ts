@@ -13,4 +13,13 @@ export type Company = {
   detail: string
 }
 
+export type Boot = {
+  companyName_th: string
+  companyName_en: string
+  promoteName: string
+  bootCount: number
+  bootName: string
+  category: string
+}
+
 export type CompanyCategory = string[]
