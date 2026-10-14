@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { IBM_Plex_Sans_Thai } from 'next/font/google'
 import localFont from 'next/font/local'
 import './globals.css'
+import { Navbar } from '@/components/navbar'
 
 const ibmPlexSansThai = IBM_Plex_Sans_Thai({
   variable: '--font-ibm-plex-thai',
@@ -41,7 +42,10 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
       lang="th"
       className={`${ibmPlexSansThai.variable} ${benguiat.variable} ${helveticaWorld.variable} ${fcIconic.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        {children}
+        <Navbar />
+      </body>
     </html>
   )
 }
