@@ -1,4 +1,4 @@
-import type { Company, CompanyCategory } from '@/types/schema'
+import type { Boot, Company, CompanyCategory } from '@/types/schema'
 
 const GIST_RAW_BASE = process.env.NEXT_PUBLIC_GIST_RAW_BASE
 
@@ -22,6 +22,13 @@ async function fetchJson<T>(path: string, revalidate = 3600): Promise<T> {
 
 export async function fetchCompanies(): Promise<Company[]> {
   return fetchJson<Company[]>('companies.json')
+}
+
+export async function fetchBootmapDay1(): Promise<Boot[]> {
+  return fetchJson<Boot[]>('bootmap1.json')
+}
+export async function fetchBootmapDay2(): Promise<Boot[]> {
+  return fetchJson<Boot[]>('bootmap2.json')
 }
 
 export async function fetchCompanyCategory(): Promise<CompanyCategory> {
