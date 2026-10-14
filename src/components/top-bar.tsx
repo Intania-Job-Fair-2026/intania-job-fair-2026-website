@@ -5,8 +5,8 @@ import Link from 'next/link'
 export const TopBar = () => {
   return (
     <header className="relative w-full">
-      {/* Desktop: logo hugs the left edge of the screen, mirroring the cloud on the right */}
-      <div className="mx-auto flex w-full max-w-[402px] items-center px-6 md:max-w-3xl lg:max-w-none lg:px-10">
+      {/* Logo hugs the left edge of the screen at every width, mirroring the cloud on the right */}
+      <div className="flex w-full items-center px-6 lg:px-10">
         <Link href="/" className="relative size-20 shrink-0">
           <Image
             src="/images/home/job-fair-logo.png"

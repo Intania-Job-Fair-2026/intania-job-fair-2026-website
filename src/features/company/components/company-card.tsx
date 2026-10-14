@@ -3,9 +3,16 @@ import Image from 'next/image'
 import { BoothCode, InfoRow, ListingCard, TagList } from '@/components/listing-card'
 import type { Company } from '../types'
 
-export const CompanyCard = ({ company }: { company: Company }) => {
+export const CompanyCard = ({
+  company,
+  linked = true,
+}: {
+  company: Company
+  /** Link to the company's detail page; off on the detail page itself */
+  linked?: boolean
+}) => {
   return (
-    <ListingCard className="shadow-card">
+    <ListingCard className="shadow-card" href={linked ? `/companies/${company.id}` : undefined}>
       <div className="flex min-h-[136px] w-full items-start gap-4">
         <div className="flex min-w-0 flex-1 flex-col gap-2">
           <div className="flex w-full items-center gap-2">

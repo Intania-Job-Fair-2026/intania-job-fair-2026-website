@@ -1,22 +1,38 @@
 import type { LucideIcon } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
 import type { ReactNode } from 'react'
 import { cn } from '@/utils/cn'
 
-/** Shared building blocks for the booth-directory cards (companies, jobs) */
+/** Shared building blocks for the booth-directory cards */
 
 export const ListingCard = ({
   children,
   className,
+  href,
 }: {
   children: ReactNode
   className?: string
+  /** Makes the whole card a link, e.g. to its detail page */
+  href?: string
 }) => {
+  const body = cn('flex min-w-0 flex-1 flex-col overflow-clip bg-white p-4', className)
+
   return (
     <article className="flex w-full items-center drop-shadow-card">
-      <div className={cn('flex min-w-0 flex-1 flex-col overflow-clip bg-white p-4', className)}>
-        {children}
-      </div>
+      {href ? (
+        <Link
+          href={href}
+          className={cn(
+            body,
+            'transition-transform hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-700',
+          )}
+        >
+          {children}
+        </Link>
+      ) : (
+        <div className={body}>{children}</div>
+      )}
     </article>
   )
 }

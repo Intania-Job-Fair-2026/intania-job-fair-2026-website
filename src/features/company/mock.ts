@@ -27,4 +27,5 @@ export const mockCompanies: Company[] = Array.from({ length: 67 }, (_, i) => ({
   tags: tagSets[i % tagSets.length],
   positions: ((i * 7) % 60) + 5,
   location: locations[i % locations.length],
+  description: 'ข้อมูลบลาบลาบลา',
 }))

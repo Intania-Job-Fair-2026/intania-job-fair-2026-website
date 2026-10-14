@@ -6,4 +6,5 @@ export type Company = {
   tags: string[]
   positions: number
   location: string
+  description: string
 }
