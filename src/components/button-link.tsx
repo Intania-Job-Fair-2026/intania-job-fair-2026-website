@@ -17,47 +17,78 @@ const labelClass: Record<Variant, string> = {
   outline: 'text-lg leading-[1.4]',
 }
 
-type ButtonLinkProps = {
-  href: string
+type ButtonContentProps = {
   variant?: Variant
   children: ReactNode
   iconStart?: LucideIcon
   iconEnd?: LucideIcon
-  download?: string
   className?: string
 }
 
-export const ButtonLink = ({
-  href,
-  variant = 'primary',
-  children,
-  iconStart: IconStart,
-  iconEnd: IconEnd,
-  download,
-  className,
-}: ButtonLinkProps) => {
-  const classes = cn(
+type ButtonLinkProps = ButtonContentProps & {
+  href: string
+  download?: string
+}
+
+const buttonClasses = (variant: Variant, className?: string) =>
+  cn(
     'flex items-center justify-center gap-2 overflow-clip rounded-lg transition-colors',
     containerClass[variant],
     className,
   )
-  const content = (
-    <>
-      {IconStart && <IconStart aria-hidden size={16} className="shrink-0" />}
-      <span className={cn('text-trim font-thai whitespace-nowrap', labelClass[variant])}>
-        {children}
-      </span>
-      {IconEnd && <IconEnd aria-hidden size={16} className="shrink-0" />}
-    </>
-  )
+
+const ButtonContent = ({
+  variant = 'primary',
+  children,
+  iconStart: IconStart,
+  iconEnd: IconEnd,
+}: ButtonContentProps) => (
+  <>
+    {IconStart && <IconStart aria-hidden size={16} className="shrink-0" />}
+    <span className={cn('text-trim font-thai whitespace-nowrap', labelClass[variant])}>
+      {children}
+    </span>
+    {IconEnd && <IconEnd aria-hidden size={16} className="shrink-0" />}
+  </>
+)
+
+/** Same look as ButtonLink, for actions that are not navigation */
+export const Button = ({
+  variant = 'primary',
+  className,
+  type = 'button',
+  onClick,
+  ...content
+}: ButtonContentProps & {
+  type?: 'button' | 'submit'
+  onClick?: () => void
+}) => (
+  <button
+    type={type}
+    onClick={onClick}
+    className={cn(buttonClasses(variant, className), 'cursor-pointer')}
+  >
+    <ButtonContent variant={variant} {...content} />
+  </button>
+)
+
+export const ButtonLink = ({
+  href,
+  variant = 'primary',
+  download,
+  className,
+  ...content
+}: ButtonLinkProps) => {
+  const classes = buttonClasses(variant, className)
+  const label = <ButtonContent variant={variant} {...content} />
 
   return download ? (
     <a href={href} download={download} className={classes}>
-      {content}
+      {label}
     </a>
   ) : (
     <Link href={href} className={classes}>
-      {content}
+      {label}
     </Link>
   )
 }

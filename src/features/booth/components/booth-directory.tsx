@@ -1,12 +1,10 @@
 'use client'
 
-import { Directory } from '@/components/directory/directory'
-import { useDirectory } from '@/components/directory/use-directory'
-import { CompanyCard } from '@/features/company/components/company-card'
+import { CompanyDirectory } from '@/features/company/components/company-directory'
+import { sortByBooth, sortByName } from '@/features/company/sort-options'
 import type { Company } from '@/features/company/types'
 
-const getSearchFields = (c: Company) => [c.booth, c.name, c.location, ...c.tags]
-const getSortKey = (c: Company) => c.booth
+const sortOptions = [sortByBooth, sortByName]
 
 export const BoothDirectory = ({
   companies,
@@ -15,27 +13,13 @@ export const BoothDirectory = ({
   companies: Company[]
   initialQuery?: string
 }) => {
-  const directory = useDirectory(companies, {
-    getSearchFields,
-    getSortKey,
-    initialQuery,
-  })
-
   return (
-    <Directory
+    <CompanyDirectory
+      companies={companies}
+      initialQuery={initialQuery}
       heading="บูธทั้งหมด"
-      countLabel={`พบ ${directory.total} บูธ`}
-      query={directory.query}
-      onQueryChange={directory.setQuery}
-      sortOrder={directory.sortOrder}
-      onToggleSort={directory.toggleSortOrder}
-      page={directory.page}
-      totalPages={directory.totalPages}
-      onPageChange={directory.setPage}
-    >
-      {directory.visible.map((company) => (
-        <CompanyCard key={company.id} company={company} />
-      ))}
-    </Directory>
+      countNoun="บูธ"
+      sortOptions={sortOptions}
+    />
   )
 }

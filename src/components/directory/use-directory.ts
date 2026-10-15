@@ -4,24 +4,24 @@ import { useMemo, useState } from 'react'
 
 const PAGE_SIZE = 12
 
-export type SortOrder = 'asc' | 'desc'
+export type SortOption<T> = {
+  id: string
+  label: string
+  getKey: (item: T) => string
+}
 
 type UseDirectoryOptions<T> = {
-  /** Fields matched (case-insensitively) against the search query */
   getSearchFields: (item: T) => string[]
-  /** Value the list is sorted by */
-  getSortKey: (item: T) => string
-  /** Pre-filled search query, e.g. from the `?q=` URL param */
+  sortOptions: SortOption<T>[]
   initialQuery?: string
 }
 
-/** Client-side search, sort and pagination for a booth-directory list */
 export function useDirectory<T>(
   items: T[],
-  { getSearchFields, getSortKey, initialQuery = '' }: UseDirectoryOptions<T>,
+  { getSearchFields, sortOptions, initialQuery = '' }: UseDirectoryOptions<T>,
 ) {
   const [query, setQuery] = useState(initialQuery)
-  const [sortOrder, setSortOrder] = useState<SortOrder>('asc')
+  const [sortBy, setSortBy] = useState(sortOptions[0].id)
   const [page, setPage] = useState(1)
 
   const filtered = useMemo(() => {
@@ -29,11 +29,9 @@ export function useDirectory<T>(
     const matches = q
       ? items.filter((item) => getSearchFields(item).some((f) => f.toLowerCase().includes(q)))
       : items
-    const direction = sortOrder === 'asc' ? 1 : -1
-    return [...matches].sort(
-      (a, b) => getSortKey(a).localeCompare(getSortKey(b), 'th', { numeric: true }) * direction,
-    )
-  }, [items, query, sortOrder, getSearchFields, getSortKey])
+    const getKey = (sortOptions.find((o) => o.id === sortBy) ?? sortOptions[0]).getKey
+    return [...matches].sort((a, b) => getKey(a).localeCompare(getKey(b), 'th', { numeric: true }))
+  }, [items, query, sortBy, getSearchFields, sortOptions])
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE))
   const currentPage = Math.min(page, totalPages)
@@ -44,8 +42,12 @@ export function useDirectory<T>(
       setQuery(value)
       setPage(1)
     },
-    sortOrder,
-    toggleSortOrder: () => setSortOrder((o) => (o === 'asc' ? 'desc' : 'asc')),
+    sortOptions,
+    sortBy,
+    setSortBy: (id: string) => {
+      setSortBy(id)
+      setPage(1)
+    },
     total: filtered.length,
     visible: filtered.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE),
     page: currentPage,
