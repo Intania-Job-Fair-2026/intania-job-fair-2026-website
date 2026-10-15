@@ -27,15 +27,17 @@ export const TopBar = () => {
           height={80}
           className="absolute inset-0 block max-w-none"
         />
-        {/* TODO: Contact to เสี่ยหนู */}
-        <a href="#" className="absolute top-8 left-[26px] flex w-[159px] items-center gap-2">
+        <Link
+          href="/contact"
+          className="absolute top-8 left-[26px] flex w-[159px] items-center gap-2"
+        >
           <span className="text-trim bg-linear-to-b from-red-500 to-red-700 bg-clip-text font-display text-xl leading-[1.2] font-bold tracking-[1.6px] whitespace-nowrap text-transparent">
             Contact Us
           </span>
           <span className="relative size-6 shrink-0 bg-linear-to-b from-red-500 to-red-700">
             <ArrowUpRight aria-hidden size={24} className="text-white" />
           </span>
-        </a>
+        </Link>
       </div>
     </header>
   )
