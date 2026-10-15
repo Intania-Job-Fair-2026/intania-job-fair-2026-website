@@ -1,4 +1,4 @@
-import { BriefcaseBusiness, MapPin } from 'lucide-react'
+import { BriefcaseBusiness, CalendarDays } from 'lucide-react'
 import Image from 'next/image'
 import { BoothCode, InfoRow, ListingCard, TagList } from '@/components/listing-card'
 import type { Company } from '../types'
@@ -27,13 +27,13 @@ export const CompanyCard = ({
           <div className="flex w-full flex-col gap-3">
             <TagList tags={company.tags} />
             <div className="flex w-full flex-col gap-2">
-              <InfoRow icon={BriefcaseBusiness}>{company.positions} ตำแหน่งงาน</InfoRow>
-              <InfoRow icon={MapPin}>{company.location}</InfoRow>
+              <InfoRow icon={BriefcaseBusiness}>{company.category}</InfoRow>
+              {company.days && <InfoRow icon={CalendarDays}>{company.days}</InfoRow>}
             </div>
           </div>
         </div>
 
-        <BoothCode booth={company.booth} />
+        <BoothCode booths={company.booths} />
       </div>
     </ListingCard>
   )

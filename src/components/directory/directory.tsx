@@ -1,10 +1,10 @@
 'use client'
 
 import { ArrowRightLeft } from 'lucide-react'
-import type { ReactNode } from 'react'
+import { type ReactNode, useState } from 'react'
 import { Pagination } from '@/components/pagination'
 import { SearchBar } from '@/components/search-bar'
-import type { SortOrder } from './use-directory'
+import { SortDialog } from './sort-dialog'
 
 type DirectoryProps = {
   heading: string
@@ -12,8 +12,11 @@ type DirectoryProps = {
   countLabel: string
   query: string
   onQueryChange: (value: string) => void
-  sortOrder: SortOrder
-  onToggleSort: () => void
+  /** Opens the filter UI from the search bar's filter button */
+  onFilterClick?: () => void
+  sortOptions: { id: string; label: string }[]
+  sortBy: string
+  onSortChange: (id: string) => void
   page: number
   totalPages: number
   onPageChange: (page: number) => void
@@ -26,16 +29,21 @@ export const Directory = ({
   countLabel,
   query,
   onQueryChange,
-  sortOrder,
-  onToggleSort,
+  onFilterClick,
+  sortOptions,
+  sortBy,
+  onSortChange,
   page,
   totalPages,
   onPageChange,
   children,
 }: DirectoryProps) => {
+  const [sortOpen, setSortOpen] = useState(false)
+  const sortLabel = sortOptions.find((o) => o.id === sortBy)?.label
+
   return (
     <div className="flex w-full flex-col gap-10 pb-4">
-      <SearchBar value={query} onChange={onQueryChange} />
+      <SearchBar value={query} onChange={onQueryChange} onFilterClick={onFilterClick} />
 
       <section className="flex w-full flex-col gap-8">
         <h2 className="sr-only">{heading}</h2>
@@ -45,8 +53,9 @@ export const Directory = ({
           </p>
           <button
             type="button"
-            onClick={onToggleSort}
-            aria-label={`จัดเรียง (${sortOrder === 'asc' ? 'น้อยไปมาก' : 'มากไปน้อย'})`}
+            onClick={() => setSortOpen(true)}
+            aria-haspopup="dialog"
+            aria-label={`จัดเรียง (ตาม${sortLabel})`}
             className="flex cursor-pointer items-center gap-1"
           >
             <span className="text-trim font-thai text-xl leading-[1.2] font-medium whitespace-nowrap text-red-700">
@@ -66,6 +75,14 @@ export const Directory = ({
           {children}
         </div>
       </section>
+
+      <SortDialog
+        open={sortOpen}
+        onClose={() => setSortOpen(false)}
+        options={sortOptions}
+        value={sortBy}
+        onChange={onSortChange}
+      />
 
       <Pagination page={page} totalPages={totalPages} onChange={onPageChange} />
     </div>

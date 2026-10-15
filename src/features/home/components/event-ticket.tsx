@@ -17,7 +17,7 @@ export const EventTicket = () => {
       <section className="relative flex w-full flex-col items-center gap-6 overflow-clip rounded-2xl bg-white pb-8">
         <p
           aria-hidden
-          className="text-trim pointer-events-none absolute top-[112px] left-1 font-heading text-[160px] leading-[1.2] font-bold tracking-[-9.6px] whitespace-nowrap text-blue-500 uppercase opacity-10"
+          className="text-trim pointer-events-none absolute top-[112px] left-1/2 -translate-x-1/2 font-heading text-[160px] leading-[1.2] font-bold tracking-[-9.6px] whitespace-nowrap text-blue-500 uppercase opacity-10"
         >
           2026
         </p>
@@ -30,7 +30,7 @@ export const EventTicket = () => {
 
         <h1 className="text-trim relative w-full text-center font-heading text-[clamp(2.25rem,12vw,3rem)] leading-[1.2] font-bold tracking-[-0.06em] text-ink">
           Intania{' '}
-          <span className="bg-linear-to-b from-red-500 to-red-700 bg-clip-text text-transparent">
+          <span className="-mr-[0.06em] bg-linear-to-b from-red-500 to-red-700 bg-clip-text pr-[0.06em] text-transparent">
             Job Fair
           </span>
         </h1>

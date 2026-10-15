@@ -1,22 +1,20 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
+import { getCompanies, getCompany } from '@/features/company/api/company-service'
 import { CompanyCard } from '@/features/company/components/company-card'
-import { mockCompanies } from '@/features/company/mock'
+import { CompanyContact } from '@/features/company/components/company-contact'
 
-// TODO: fetch the company from the API once available
-const getCompany = (id: string) => mockCompanies.find((c) => c.id === id)
-
-export const generateStaticParams = () => mockCompanies.map((c) => ({ id: c.id }))
+export const generateStaticParams = async () => (await getCompanies()).map((c) => ({ id: c.id }))
 
 export async function generateMetadata(props: PageProps<'/companies/[id]'>): Promise<Metadata> {
   const { id } = await props.params
-  const company = getCompany(id)
+  const company = await getCompany(id)
   return { title: `${company?.name ?? 'บริษัท'} | Intania Job Fair 2026` }
 }
 
 export default async function CompanyDetailPage(props: PageProps<'/companies/[id]'>) {
   const { id } = await props.params
-  const company = getCompany(id)
+  const company = await getCompany(id)
   if (!company) notFound()
 
   return (
@@ -25,10 +23,13 @@ export default async function CompanyDetailPage(props: PageProps<'/companies/[id
 
       <section className="flex w-full flex-col gap-7 px-1.5 text-black">
         <h2 className="text-trim font-thai text-xl leading-[1.2] font-medium">เกี่ยวกับบริษัท</h2>
-        <p className="text-trim font-thai text-xl leading-[1.2] font-medium whitespace-pre-line">
-          {company.description}
+        {/* Real descriptions run to several lines, so this uses a looser line height than the mock */}
+        <p className="font-thai text-xl leading-[1.6] font-medium whitespace-pre-line">
+          {company.description || 'ยังไม่มีข้อมูลเกี่ยวกับบริษัท'}
         </p>
       </section>
+
+      <CompanyContact contact={company.contact} />
     </div>
   )
 }

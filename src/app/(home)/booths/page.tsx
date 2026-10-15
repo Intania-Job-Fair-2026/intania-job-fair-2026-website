@@ -1,14 +1,14 @@
 import type { Metadata } from 'next'
 import { BoothDirectory } from '@/features/booth/components/booth-directory'
 import { BoothMap } from '@/features/booth/components/booth-map'
-import { mockCompanies } from '@/features/company/mock'
+import { getCompanies } from '@/features/company/api/company-service'
 
 export const metadata: Metadata = {
   title: 'บูธ | Intania Job Fair 2026',
 }
 
 export default async function HomeBoothsPage(props: PageProps<'/booths'>) {
-  const { q } = await props.searchParams
+  const [{ q }, companies] = await Promise.all([props.searchParams, getCompanies()])
 
   return (
     <>
@@ -21,10 +21,7 @@ export default async function HomeBoothsPage(props: PageProps<'/booths'>) {
           </div>
         }
       />
-      <BoothDirectory
-        companies={mockCompanies}
-        initialQuery={typeof q === 'string' ? q : undefined}
-      />
+      <BoothDirectory companies={companies} initialQuery={typeof q === 'string' ? q : undefined} />
     </>
   )
 }

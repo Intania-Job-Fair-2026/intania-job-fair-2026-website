@@ -1,5 +1,4 @@
 import type { LucideIcon } from 'lucide-react'
-import Image from 'next/image'
 import Link from 'next/link'
 import type { ReactNode } from 'react'
 import { cn } from '@/utils/cn'
@@ -19,7 +18,7 @@ export const ListingCard = ({
   const body = cn('flex min-w-0 flex-1 flex-col overflow-clip bg-white p-4', className)
 
   return (
-    <article className="flex w-full items-center drop-shadow-card">
+    <article className="flex w-full items-center drop-shadow-card motion-safe:animate-fade-in">
       {href ? (
         <Link
           href={href}
@@ -38,6 +37,8 @@ export const ListingCard = ({
 }
 
 export const TagList = ({ tags }: { tags: string[] }) => {
+  if (tags.length === 0) return null
+
   return (
     <ul className="flex w-full flex-wrap items-center gap-1">
       {tags.map((tag) => (
@@ -56,7 +57,7 @@ export const TagList = ({ tags }: { tags: string[] }) => {
 
 export const InfoRow = ({ icon: Icon, children }: { icon: LucideIcon; children: ReactNode }) => {
   return (
-    <div className="flex w-full items-center gap-1 border-b border-blue-900">
+    <div className="flex w-full items-center gap-1 border-b border-blue-900 pb-1">
       <Icon aria-hidden size={16} className="shrink-0 text-ink" />
       <p className="text-trim min-w-0 flex-1 font-thai text-sm leading-[1.4] tracking-[0.28px] text-ink">
         {children}
@@ -65,26 +66,29 @@ export const InfoRow = ({ icon: Icon, children }: { icon: LucideIcon; children: 
   )
 }
 
-/** Vertical divider followed by the booth code, on the right edge of a card */
-export const BoothCode = ({ booth }: { booth: string }) => {
+/**
+ * Vertical divider followed by the booth code(s), on the right edge of a card.
+ * A booth with a `day` is labelled with it, for companies that move between days.
+ */
+export const BoothCode = ({ booths }: { booths: { code: string; day?: string }[] }) => {
   return (
     <>
-      <div className="flex h-[136px] w-0 shrink-0 items-center justify-center">
-        <div className="flex-none rotate-90">
-          <Image
-            src="/icons/divider-vertical.svg"
-            alt=""
-            width={136}
-            height={1}
-            className="block max-w-none"
-          />
-        </div>
-      </div>
-      <div className="flex shrink-0 items-center justify-center p-1">
-        <p className="text-trim font-display text-2xl leading-[1.2] font-bold tracking-[3.84px] whitespace-nowrap text-red-900">
-          {booth}
-        </p>
-      </div>
+      {/* Same 1px blue-900 line as divider-vertical.svg, but stretches with taller cards */}
+      <div aria-hidden className="min-h-[136px] w-px shrink-0 self-stretch bg-blue-900" />
+      <ul className="flex shrink-0 flex-col items-center gap-3 p-1">
+        {booths.map(({ code, day }) => (
+          <li key={code} className="flex flex-col items-center gap-1.5">
+            {day && (
+              <span className="text-trim font-thai text-xs leading-[1.4] whitespace-nowrap text-ink">
+                วันที่ {day}
+              </span>
+            )}
+            <span className="text-trim font-display text-2xl leading-[1.2] font-bold tracking-[3.84px] whitespace-nowrap text-red-900">
+              {code}
+            </span>
+          </li>
+        ))}
+      </ul>
     </>
   )
 }
