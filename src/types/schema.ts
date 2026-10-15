@@ -11,6 +11,9 @@ export type Company = {
   internship12: boolean //รับฝึกงานปี 1 2
   category: string
   detail: string
+  email: string
+  tel: string
+  contactPerson: string
 }
 
 export type Boot = {

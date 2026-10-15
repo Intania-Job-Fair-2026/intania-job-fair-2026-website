@@ -56,6 +56,9 @@ const CompanyKeyMap = {
   หมวดหมู่: 'category',
   เกี่ยวกับบริษัท: 'detail',
   ชื่อบูธ: 'bootName',
+  Tel: 'tel',
+  'Contact Person': 'contactPerson',
+  Email: 'email',
 }
 
 async function main() {
