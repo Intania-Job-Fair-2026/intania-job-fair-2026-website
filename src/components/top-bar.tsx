@@ -1,6 +1,6 @@
-import { ArrowUpRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { ContactButton } from '@/features/contact/components/contact-button'
 
 export const TopBar = () => {
   return (
@@ -19,7 +19,7 @@ export const TopBar = () => {
         </Link>
       </div>
       {/* Fixed-size cloud pinned to the right edge of the screen, bleeding 31px off it */}
-      <div className="absolute top-0 right-[-31px] h-20 w-[216px]">
+      <div className="absolute top-0 -right-7.75 h-20 w-54">
         <Image
           src="/icons/navbar-cloud.svg"
           alt=""
@@ -27,17 +27,7 @@ export const TopBar = () => {
           height={80}
           className="absolute inset-0 block max-w-none"
         />
-        <Link
-          href="/contact"
-          className="absolute top-8 left-[26px] flex w-[159px] items-center gap-2"
-        >
-          <span className="text-trim bg-linear-to-b from-red-500 to-red-700 bg-clip-text font-display text-xl leading-[1.2] font-bold tracking-[1.6px] whitespace-nowrap text-transparent">
-            Contact Us
-          </span>
-          <span className="relative size-6 shrink-0 bg-linear-to-b from-red-500 to-red-700">
-            <ArrowUpRight aria-hidden size={24} className="text-white" />
-          </span>
-        </Link>
+        <ContactButton />
       </div>
     </header>
   )

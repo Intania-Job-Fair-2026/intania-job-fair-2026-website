@@ -19,20 +19,19 @@ function InstagramIcon() {
   )
 }
 
-// Text sizes scale with the viewport height so both blocks fit on one screen
-const heading = 'text-[clamp(18px,3dvh,24px)] leading-[1.4] font-bold'
-const body = 'text-[clamp(14px,2.4dvh,20px)] leading-[1.3]'
+const heading = 'text-2xl leading-[1.4] font-bold'
+const body = 'text-lg leading-[1.5]'
 
 export function ContactInfo() {
   return (
-    <div className="flex min-h-0 w-full flex-col justify-evenly gap-[2dvh] px-6 font-thai">
+    <div className="flex w-full flex-col gap-8 px-6 font-thai">
       <section className="flex flex-col gap-[1.5dvh]">
         <div className="flex flex-col gap-[0.8dvh]">
-          <h1 className={heading}>
+          <h3 className={heading}>
             ศูนย์พัฒนาสมรรถนะและ
             <br />
             ความพร้อมทางอาชีพ (CDC)
-          </h1>
+          </h3>
           <p className={body}>ภารกิจกิจการนิสิต คณะวิศวกรรมศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย</p>
         </div>
         <ul className={`flex flex-col gap-[1dvh] ${body}`}>
@@ -48,7 +47,7 @@ export function ContactInfo() {
       </section>
 
       <section className="flex flex-col items-end gap-[1dvh] text-right">
-        <h2 className={heading}>ฝ่ายวิชาการ</h2>
+        <h3 className={heading}>ฝ่ายวิชาการ</h3>
         <p className={body}>
           กรรมการนิสิตคณะวิศวกรรมศาสตร์
           <br />
