@@ -11,6 +11,7 @@
   --color-red-500: #ab1212;
   --color-red-700: #831923;
   --color-red-900: #480808;
+  --color-blue-50: #f0f8fc;
   --color-blue-100: #d0e8f6;
   --color-blue-300: #98cdec;
   --color-blue-500: #66b5e3;
@@ -20,6 +21,11 @@
   --color-accent-primary: #66b5e3;
   --color-ink: #1e1e1e;
   --color-ink-muted: #444444;
+  /* Figma "white/700" — secondary body text */
+  --color-ink-secondary: #383838;
+  /* Accepts / doesn't-accept marks on the company detail page */
+  --color-success: #00c07b;
+  --color-danger: #ff3918;
   /* Figma "white/300" — input and dropdown borders */
   --color-line: #d9d9d9;
 

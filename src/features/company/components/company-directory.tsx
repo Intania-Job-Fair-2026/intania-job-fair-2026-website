@@ -4,7 +4,7 @@ import { useMemo, useState } from 'react'
 import { Directory } from '@/components/directory/directory'
 import { type SortOption, useDirectory } from '@/components/directory/use-directory'
 import { type CompanyFilters, EMPTY_FILTERS, matchesFilters } from '../filters'
-import { sortByBooth, sortByName } from '../sort-options'
+import { sortByBooth, sortByCategory, sortByName } from '../sort-options'
 import type { Company } from '../types'
 import { CompanyCard } from './company-card'
 import { CompanyFilterSheet } from './company-filter-sheet'
@@ -17,7 +17,7 @@ const getSearchFields = (c: Company) => [
   ...c.tags,
 ]
 
-const defaultSortOptions = [sortByName, sortByBooth]
+const defaultSortOptions = [sortByName, sortByCategory, sortByBooth]
 
 type CompanyDirectoryProps = {
   companies: Company[]
