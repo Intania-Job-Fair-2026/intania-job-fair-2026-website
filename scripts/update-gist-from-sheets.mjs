@@ -59,6 +59,7 @@ const CompanyKeyMap = {
   Tel: 'tel',
   'Contact Person': 'contactPerson',
   Email: 'email',
+  Logo: 'logo',
 }
 
 async function main() {
