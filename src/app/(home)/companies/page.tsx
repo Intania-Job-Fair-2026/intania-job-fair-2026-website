@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import { Banner } from '@/components/banner'
 import { CompanyDirectory } from '@/features/company/components/company-directory'
 import { getCompanies } from '@/features/company/api/company-service'
 
@@ -12,7 +11,6 @@ export default async function HomeCompaniesPage(props: PageProps<'/companies'>) 
 
   return (
     <>
-      <Banner />
       <CompanyDirectory
         companies={companies}
         initialQuery={typeof q === 'string' ? q : undefined}

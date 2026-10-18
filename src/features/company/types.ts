@@ -14,10 +14,16 @@ export type Company = {
   name: string
   /** Thai / English legal names, matched by search */
   altNames: string[]
+  /** Legal names shown on the detail page */
+  nameTh: string
+  nameEn: string
   logo: string
   booths: Booth[]
   tags: string[]
+  /** English part only, e.g. "Automotive & Machinery" */
   category: string
+  /** As in the sheet, e.g. "Automotive & Machinery - งานยานยนต์ / เครื่องจักร" */
+  categoryFull: string
   eventDays: EventDay[]
   workTypes: WorkType[]
   /** Event days attended, e.g. "28–29 ต.ค." */

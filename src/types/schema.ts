@@ -14,6 +14,7 @@ export type Company = {
   email: string
   tel: string
   contactPerson: string
+  logo: string
 }
 
 export type Boot = {

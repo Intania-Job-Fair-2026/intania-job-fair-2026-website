@@ -4,18 +4,15 @@ import { CompanyCard } from '@/features/company/components/company-card'
 import { getCompanies } from '@/features/company/api/company-service'
 import { EventTicket } from '@/features/home/components/event-ticket'
 import { FeaturedSection } from '@/features/home/components/featured-section'
-import { HomeSearch } from '@/features/home/components/home-search'
 
 const FEATURED_COUNT = 4
 
 export default async function HomePage() {
-  // TODO: replace with a curated "featured" list once the sheet has one
   const featuredCompanies = (await getCompanies()).slice(0, FEATURED_COUNT)
 
   return (
     <>
       <EventTicket />
-      <HomeSearch />
       <BoothMap
         header={
           <SectionHeader title="แผนผังบูธบริษัท" link={{ href: '/booths', label: 'บูธทั้งหมด' }} />
