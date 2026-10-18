@@ -1,10 +1,7 @@
 'use client'
 
 import { CompanyDirectory } from '@/features/company/components/company-directory'
-import { sortByBooth, sortByName } from '@/features/company/sort-options'
 import type { Company } from '@/features/company/types'
-
-const sortOptions = [sortByBooth, sortByName]
 
 export const BoothDirectory = ({
   companies,
@@ -19,7 +16,6 @@ export const BoothDirectory = ({
       initialQuery={initialQuery}
       heading="บูธทั้งหมด"
       countNoun="บูธ"
-      sortOptions={sortOptions}
     />
   )
 }
