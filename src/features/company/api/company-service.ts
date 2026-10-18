@@ -3,9 +3,6 @@ import { fetchBootmapDay1, fetchBootmapDay2, fetchCompanies } from '@/lib/data'
 import type { Boot, Company as CompanyRecord } from '@/types/schema'
 import type { Booth, Company, Contact, EventDay, WorkType } from '../types'
 
-// TODO: swap for real logos once the sheet has them
-const PLACEHOLDER_LOGO = '/images/home/company-placeholder.png'
-
 const toSlug = (name: string) =>
   name
     .toLowerCase()
@@ -94,7 +91,6 @@ export const getCompanies = cache(async (): Promise<Company[]> => {
       id: toSlug(c.companyName_en),
       name: c.promoteName,
       altNames: [c.companyName_th, c.companyName_en],
-      logo: PLACEHOLDER_LOGO,
       booths: toBooths(day1Booths.get(key), day2Booths.get(key)),
       tags: workTypes.map((t) => TAG_LABELS[t]),
       // "Automotive & Machinery - งานยานยนต์ / เครื่องจักร" -> "Automotive & Machinery"
@@ -104,6 +100,7 @@ export const getCompanies = cache(async (): Promise<Company[]> => {
       days: eventDays.length ? `${eventDays.join('–')} ต.ค.` : '',
       description: c.detail.trim(),
       contact: toContact(c),
+      logo: c.logo,
     }
   })
 })
