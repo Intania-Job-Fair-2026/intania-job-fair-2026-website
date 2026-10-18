@@ -13,7 +13,6 @@ export const CompanyCard = ({
   linked?: boolean
 }) => {
   const logoUrl = getCompanyLogoUrlByDriveUrl(company.logo)
-  console.log(company.logo, logoUrl)
   return (
     <ListingCard className="shadow-card" href={linked ? `/companies/${company.id}` : undefined}>
       <div className="flex min-h-34 w-full items-start gap-4">
