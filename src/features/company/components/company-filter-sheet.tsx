@@ -43,7 +43,7 @@ export const CompanyFilterSheet = ({
       aria-labelledby="filter-sheet-title"
       onClose={onClose}
       onClick={(e) => e.target === e.currentTarget && onClose()}
-      className="mx-auto mt-auto mb-0 max-h-[calc(100dvh-24px)] w-full max-w-none flex-col overflow-clip rounded-t-3xl border-0 bg-white p-0 backdrop:bg-black/20 open:flex md:m-auto md:max-h-[calc(100dvh-48px)] md:max-w-[480px] md:rounded-3xl motion-safe:transition-[opacity,translate] motion-safe:duration-300 motion-safe:ease-out motion-safe:backdrop:transition-opacity motion-safe:backdrop:duration-300 motion-safe:starting:open:translate-y-8 motion-safe:starting:open:opacity-0 motion-safe:starting:open:backdrop:opacity-0"
+      className="mx-auto mt-auto mb-0 max-h-[calc(100dvh-24px)] w-full max-w-none flex-col overflow-clip rounded-t-3xl border-0 bg-white p-0 backdrop:bg-black/20 open:flex md:m-auto md:max-h-[calc(100dvh-48px)] md:max-w-120 md:rounded-3xl motion-safe:transition-[opacity,translate] motion-safe:duration-300 motion-safe:ease-out motion-safe:backdrop:transition-opacity motion-safe:backdrop:duration-300 motion-safe:starting:open:translate-y-8 motion-safe:starting:open:opacity-0 motion-safe:starting:open:backdrop:opacity-0"
     >
       <div className="flex w-full items-center justify-between px-6 pt-6 pb-3">
         <button type="button" onClick={onClose} aria-label="ปิด" className="cursor-pointer">
