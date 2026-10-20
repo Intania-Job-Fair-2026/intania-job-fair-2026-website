@@ -21,9 +21,12 @@
     ]
   },
   "dependencies": {
+    "@radix-ui/react-slot": "^1.5.0",
     "@supabase/ssr": "^0.12.5",
     "@supabase/supabase-js": "^2.113.0",
+    "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "embla-carousel-react": "^8.6.0",
     "lucide": "^1.52.0",
     "lucide-react": "^1.52.0",
     "motion": "^13.1.1",
