@@ -34,7 +34,7 @@ export default async function CompanyDetailPage(props: PageProps<'/companies/[id
         <header className="flex w-full flex-col items-center gap-4">
           <div className="flex w-full items-center gap-4 px-6">
             <div className="shrink-0">
-              <CompanyLogo src={getCompanyLogoUrlByDriveUrl(company.logo)} size={72} />
+              <CompanyLogo src={company.logo} size={72} />
             </div>
             <div className="flex min-w-0 flex-1 flex-col justify-center gap-4">
               <h1 className="text-trim font-thai text-2xl leading-[1.2] font-medium text-ink">

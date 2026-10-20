@@ -18,7 +18,7 @@ export const CompanyCard = ({
         <div className="flex min-w-0 flex-1 flex-col gap-2">
           <div className="flex w-full items-center gap-2">
             <div className="shrink-0">
-              <CompanyLogo src={getCompanyLogoUrlByDriveUrl(company.logo)} />
+              <CompanyLogo src={company.logo} />
             </div>
             <h3 className="text-trim min-w-0 flex-1 font-thai text-xl leading-[1.2] font-medium text-ink">
               {company.name}
