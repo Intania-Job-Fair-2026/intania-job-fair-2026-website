@@ -6,11 +6,13 @@ import { Skeleton } from '@/components/skeleton'
 import { cn } from '@/utils/cn'
 
 /** Company logo (48px on cards, larger on the detail page): a pulsing placeholder until the image loads, then fades the logo in */
-export const CompanyLogo = ({ src, size = 48 }: { src: string | null; size?: number }) => {
+export const CompanyLogo = ({ img, size = 48 }: { img: string | null; size?: number }) => {
   const [isLoading, setIsLoading] = useState(true)
   const [failed, setFailed] = useState(false)
 
-  if (!src || failed) {
+  console.log(img)
+
+  if (!img || failed) {
     return (
       <div
         style={{ width: size, height: size }}
@@ -25,7 +27,7 @@ export const CompanyLogo = ({ src, size = 48 }: { src: string | null; size?: num
     <div className="relative" style={{ width: size, height: size }}>
       {isLoading && <Skeleton tone="card" className="absolute inset-0 rounded-lg" />}
       <Image
-        src={src}
+        src={`/logo/${img}`}
         alt=""
         fill
         sizes={`${size}px`}
