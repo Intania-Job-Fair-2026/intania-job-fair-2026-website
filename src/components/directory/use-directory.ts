@@ -52,9 +52,6 @@ export function useDirectory<T>(
     visible: filtered.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE),
     page: currentPage,
     totalPages,
-    setPage: (next: number) => {
-      setPage(next)
-      window.scrollTo({ top: 0, behavior: 'smooth' })
-    },
+    setPage,
   }
 }

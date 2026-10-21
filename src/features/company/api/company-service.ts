@@ -1,5 +1,10 @@
 import { cache } from 'react'
-import { fetchBootmapDay1, fetchBootmapDay2, fetchCompanies } from '@/lib/data'
+import {
+  fetchBootmapDay1,
+  fetchBootmapDay2,
+  fetchCompanies,
+  fetchCompanyCategory,
+} from '@/lib/data'
 import type { Boot, Company as CompanyRecord } from '@/types/schema'
 import type { Booth, Company, Contact, EventDay, WorkType } from '../types'
 
@@ -109,3 +114,10 @@ export const getCompanies = cache(async (): Promise<Company[]> => {
 })
 
 export const getCompany = async (id: string) => (await getCompanies()).find((c) => c.id === id)
+
+export const getCompanyCategories = cache(async (): Promise<string[]> => {
+  const categories = await fetchCompanyCategory()
+  return [
+    ...new Set(categories.map((category) => category.split(' - ')[0].trim()).filter(Boolean)),
+  ].sort((a, b) => a.localeCompare(b))
+})

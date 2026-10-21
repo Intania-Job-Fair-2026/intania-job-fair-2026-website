@@ -80,7 +80,7 @@ export const CompanyFilterSheet = ({
         </FilterGroup>
 
         <FilterGroup label="รูปแบบการทำงาน">
-          <div className="flex w-full flex-wrap items-center justify-between gap-2">
+          <div className="flex w-full flex-wrap items-center gap-2">
             {WORK_TYPE_OPTIONS.map((type) => (
               <Chip
                 key={type.id}
