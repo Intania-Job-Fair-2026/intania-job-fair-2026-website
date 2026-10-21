@@ -45,7 +45,7 @@ export const Pagination = ({ page, totalPages, onChange }: PaginationProps) => {
   return (
     <nav
       aria-label="Pagination"
-      className="mx-auto flex w-full max-w-lg items-center justify-center gap-1 px-2 min-[375px]:gap-2 min-[375px]:px-4"
+      className="mx-auto flex w-fit max-w-full items-center justify-center gap-1 px-2 min-[375px]:gap-2 sm:px-4"
     >
       <button
         type="button"
@@ -105,7 +105,7 @@ type PageListProps = {
 
 const PageList = ({ items, page, onChange, className }: PageListProps) => {
   return (
-    <div className={cn('flex min-w-0 flex-1 items-center justify-between', className)}>
+    <div className={cn('flex min-w-0 items-center justify-center sm:gap-2', className)}>
       {items.map((item, i) =>
         item === null ? (
           <span key={`gap-${i}`} className={cn(slotClass, 'p-2')}>
