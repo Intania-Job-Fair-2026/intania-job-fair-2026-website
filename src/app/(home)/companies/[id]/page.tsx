@@ -51,8 +51,8 @@ export default async function CompanyDetailPage(props: PageProps<'/companies/[id
           </div>
 
           {categoryEn && (
-            <p className="mx-6 flex h-6 max-w-[calc(100%-48px)] items-center self-start rounded-3xl bg-blue-100 px-3">
-              <span className="text-trim truncate text-sm leading-[1.4] tracking-[0.28px] text-blue-900">
+            <p className="mx-6 flex min-h-6 max-w-[calc(100%-48px)] items-center self-start rounded-3xl bg-blue-100 px-3 py-2">
+              <span className="text-trim min-w-0 text-sm leading-[1.4] wrap-anywhere tracking-[0.28px] text-blue-900">
                 <span className="font-display">{categoryEn}</span>
                 {categoryTh && <span className="font-thai"> - {categoryTh}</span>}
               </span>
