@@ -37,7 +37,6 @@ export const CompanyLogo = ({ img, size = 48 }: { img: string | null; size?: num
           'object-contain transition-opacity duration-300',
           isLoading ? 'opacity-0' : 'opacity-100',
         )}
-        unoptimized
       />
     </div>
   )
