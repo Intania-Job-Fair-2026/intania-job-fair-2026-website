@@ -1,8 +1,9 @@
 import { LoadingScreen, Skeleton } from '@/components/skeleton'
+import { CompanyDirectorySkeleton } from '@/features/company/components/company-directory-skeleton'
 
 const GRID = 6
 
-/** Loading UI for `/booths`: a floor plan whose booths light up in a wave, then booth rows */
+/** Loading UI for `/booths`: map, carousel controls, download and the shared directory. */
 export const BoothsSkeleton = () => (
   <LoadingScreen>
     <section className="mx-auto flex w-full max-w-xl flex-col items-center gap-6">
@@ -10,7 +11,7 @@ export const BoothsSkeleton = () => (
         <Skeleton className="h-7 w-44" />
       </div>
 
-      <div className="w-full px-6">
+      <div className="relative w-full px-6">
         <div className="grid aspect-square w-full grid-cols-6 gap-2 bg-white/20 p-4">
           {Array.from({ length: GRID * GRID }, (_, i) => (
             <div
@@ -22,19 +23,12 @@ export const BoothsSkeleton = () => (
             />
           ))}
         </div>
+        <Skeleton className="absolute top-1/2 left-9 size-12 -translate-y-1/2 rounded-full bg-red-500/40 sm:size-16" />
+        <Skeleton className="absolute top-1/2 right-9 size-12 -translate-y-1/2 rounded-full bg-red-500/40 sm:size-16" />
       </div>
+      <Skeleton className="h-10 w-60 bg-red-500/40" />
     </section>
 
-    <div className="flex w-full flex-col gap-4 px-6 pb-4">
-      {Array.from({ length: 5 }, (_, i) => (
-        <div key={i} className="flex w-full items-center gap-4 bg-white p-4 shadow-card">
-          <Skeleton className="h-12 w-14 shrink-0 bg-red-500/30" />
-          <div className="flex flex-1 flex-col gap-2">
-            <Skeleton tone="card" className="h-5 w-2/3" />
-            <Skeleton tone="card" className="h-4 w-1/3" />
-          </div>
-        </div>
-      ))}
-    </div>
+    <CompanyDirectorySkeleton />
   </LoadingScreen>
 )
