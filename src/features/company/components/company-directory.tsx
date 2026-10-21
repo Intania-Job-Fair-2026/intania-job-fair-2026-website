@@ -1,9 +1,11 @@
 'use client'
 
 import { useMemo, useState } from 'react'
+import { useSearchParams } from 'next/navigation'
 import { Directory } from '@/components/directory/directory'
 import { type SortOption, useDirectory } from '@/components/directory/use-directory'
-import { type CompanyFilters, EMPTY_FILTERS, matchesFilters } from '../filters'
+import { updateSearchParams } from '@/utils/update-search-params'
+import { type CompanyFilters, DAY_OPTIONS, WORK_TYPE_OPTIONS, matchesFilters } from '../filters'
 import { sortByBooth, sortByCategory, sortByName } from '../sort-options'
 import type { Company } from '../types'
 import { CompanyCard } from './company-card'
@@ -38,7 +40,19 @@ export const CompanyDirectory = ({
   countNoun = 'บริษัท',
   sortOptions = defaultSortOptions,
 }: CompanyDirectoryProps) => {
-  const [filters, setFilters] = useState<CompanyFilters>(EMPTY_FILTERS)
+  const searchParams = useSearchParams()
+  const filters = useMemo<CompanyFilters>(
+    () => ({
+      days: DAY_OPTIONS.filter(({ id }) => searchParams.get('days')?.split(',').includes(id)).map(
+        ({ id }) => id,
+      ),
+      workTypes: WORK_TYPE_OPTIONS.filter(({ id }) =>
+        searchParams.get('workTypes')?.split(',').includes(id),
+      ).map(({ id }) => id),
+      category: searchParams.get('category') || null,
+    }),
+    [searchParams],
+  )
   const [filterOpen, setFilterOpen] = useState(false)
 
   const filtered = useMemo(
@@ -73,8 +87,12 @@ export const CompanyDirectory = ({
           initial={filters}
           categories={categories}
           onApply={(next) => {
-            setFilters(next)
-            directory.setPage(1)
+            updateSearchParams({
+              days: next.days.join(',') || null,
+              workTypes: next.workTypes.join(',') || null,
+              category: next.category,
+              page: null,
+            })
           }}
           onClose={() => setFilterOpen(false)}
         />

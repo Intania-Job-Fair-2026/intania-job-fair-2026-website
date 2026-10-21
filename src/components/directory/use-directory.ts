@@ -1,6 +1,8 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useSearchParams } from 'next/navigation'
+import { useMemo } from 'react'
+import { updateSearchParams } from '@/utils/update-search-params'
 
 const PAGE_SIZE = 12
 
@@ -20,9 +22,12 @@ export function useDirectory<T>(
   items: T[],
   { getSearchFields, sortOptions, initialQuery = '' }: UseDirectoryOptions<T>,
 ) {
-  const [query, setQuery] = useState(initialQuery)
-  const [sortBy, setSortBy] = useState(sortOptions[0].id)
-  const [page, setPage] = useState(1)
+  const searchParams = useSearchParams()
+  const query = searchParams.get('q') ?? initialQuery
+  const sortBy =
+    sortOptions.find((option) => option.id === searchParams.get('sort'))?.id ?? sortOptions[0].id
+  const requestedPage = Number(searchParams.get('page') ?? 1)
+  const page = Number.isSafeInteger(requestedPage) && requestedPage > 0 ? requestedPage : 1
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase()
@@ -39,19 +44,20 @@ export function useDirectory<T>(
   return {
     query,
     setQuery: (value: string) => {
-      setQuery(value)
-      setPage(1)
+      updateSearchParams({ q: value, page: null })
     },
     sortOptions,
     sortBy,
     setSortBy: (id: string) => {
-      setSortBy(id)
-      setPage(1)
+      updateSearchParams({ sort: id, page: null })
     },
     total: filtered.length,
     visible: filtered.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE),
     page: currentPage,
     totalPages,
-    setPage,
+    setPage: (next: number) => {
+      const target = Math.max(1, Math.min(next, totalPages))
+      updateSearchParams({ page: target === 1 ? null : String(target) })
+    },
   }
 }

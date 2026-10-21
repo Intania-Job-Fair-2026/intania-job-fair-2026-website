@@ -1,6 +1,6 @@
 'use client'
 
-import { type ReactNode, useRef } from 'react'
+import { type ReactNode, useEffect, useRef } from 'react'
 import { Pagination } from '@/components/pagination'
 import { SearchBar } from '@/components/search-bar'
 import { SortDropdown } from './sort-dropdown'
@@ -38,6 +38,13 @@ export const Directory = ({
   children,
 }: DirectoryProps) => {
   const directoryRef = useRef<HTMLDivElement>(null)
+  const scrollOnPageChange = useRef(false)
+
+  useEffect(() => {
+    if (!scrollOnPageChange.current) return
+    scrollOnPageChange.current = false
+    directoryRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }, [page])
 
   return (
     <div ref={directoryRef} className="flex w-full flex-col gap-10 pb-4">
@@ -61,8 +68,9 @@ export const Directory = ({
         page={page}
         totalPages={totalPages}
         onChange={(next) => {
+          if (next === page) return
+          scrollOnPageChange.current = true
           onPageChange(next)
-          directoryRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
         }}
       />
     </div>
