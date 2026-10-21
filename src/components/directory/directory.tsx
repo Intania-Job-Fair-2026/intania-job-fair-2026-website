@@ -1,6 +1,6 @@
 'use client'
 
-import type { ReactNode } from 'react'
+import { type ReactNode, useRef } from 'react'
 import { Pagination } from '@/components/pagination'
 import { SearchBar } from '@/components/search-bar'
 import { SortDropdown } from './sort-dropdown'
@@ -37,8 +37,10 @@ export const Directory = ({
   onPageChange,
   children,
 }: DirectoryProps) => {
+  const directoryRef = useRef<HTMLDivElement>(null)
+
   return (
-    <div className="flex w-full flex-col gap-10 pb-4">
+    <div ref={directoryRef} className="flex w-full flex-col gap-10 pb-4">
       <SearchBar value={query} onChange={onQueryChange} onFilterClick={onFilterClick} />
 
       <section className="flex w-full flex-col gap-8">
@@ -55,7 +57,14 @@ export const Directory = ({
         </div>
       </section>
 
-      <Pagination page={page} totalPages={totalPages} onChange={onPageChange} />
+      <Pagination
+        page={page}
+        totalPages={totalPages}
+        onChange={(next) => {
+          onPageChange(next)
+          directoryRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        }}
+      />
     </div>
   )
 }

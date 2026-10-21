@@ -22,6 +22,8 @@ export default async function CompanyDetailPage(props: PageProps<'/companies/[id
   if (!company) notFound()
 
   const [categoryEn, categoryTh] = company.categoryFull.split(' - ')
+  const description = company.description || 'ยังไม่มีข้อมูลเกี่ยวกับบริษัท'
+  const descriptionFont = /[\u0E00-\u0E7F]/.test(description) ? 'font-thai' : 'font-heading'
 
   return (
     // data-page-bg tells the layout to swap its gradient for this page's flat background
@@ -34,7 +36,7 @@ export default async function CompanyDetailPage(props: PageProps<'/companies/[id
         <header className="flex w-full flex-col items-center gap-4">
           <div className="flex w-full items-center gap-4 px-6">
             <div className="shrink-0">
-              <CompanyLogo img={company.logo} />
+              <CompanyLogo img={company.logo} size={82} />
             </div>
             <div className="flex min-w-0 flex-1 flex-col justify-center gap-4">
               <h1 className="text-trim font-thai text-2xl leading-[1.2] font-medium text-ink">
@@ -49,7 +51,7 @@ export default async function CompanyDetailPage(props: PageProps<'/companies/[id
           </div>
 
           {categoryEn && (
-            <p className="mx-6 flex h-6 max-w-[calc(100%-48px)] items-center rounded-3xl bg-blue-100 px-3">
+            <p className="mx-6 flex h-6 max-w-[calc(100%-48px)] items-center self-start rounded-3xl bg-blue-100 px-3">
               <span className="text-trim truncate text-sm leading-[1.4] tracking-[0.28px] text-blue-900">
                 <span className="font-display">{categoryEn}</span>
                 {categoryTh && <span className="font-thai"> - {categoryTh}</span>}
@@ -64,13 +66,12 @@ export default async function CompanyDetailPage(props: PageProps<'/companies/[id
         <WorkTypeChecklist workTypes={company.workTypes} />
       </div>
 
-      <section className="flex w-full flex-col gap-6 px-6">
+      <section className="flex w-full flex-col gap-4 px-6">
         <h2 className="text-trim font-thai text-xl leading-[1.2] font-medium text-ink">
           เกี่ยวกับบริษัท
         </h2>
-        {/* Helvetica World for English copy; Thai text falls through to IBM Plex Sans Thai */}
-        <p className="font-[family-name:var(--font-helvetica-world),var(--font-ibm-plex-thai)] text-base leading-[1.6] whitespace-pre-line text-ink-secondary">
-          {company.description || 'ยังไม่มีข้อมูลเกี่ยวกับบริษัท'}
+        <p className={`${descriptionFont} text-base whitespace-pre-line text-ink-secondary`}>
+          {description}
         </p>
       </section>
 

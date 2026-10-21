@@ -21,6 +21,7 @@ const defaultSortOptions = [sortByName, sortByCategory, sortByBooth]
 
 type CompanyDirectoryProps = {
   companies: Company[]
+  categories: string[]
   initialQuery?: string
   heading?: string
   /** Noun in the result count, e.g. "บริษัท" -> "พบ 61 บริษัท" */
@@ -31,6 +32,7 @@ type CompanyDirectoryProps = {
 /** Searchable, filterable, sortable company list; also used for the booth list */
 export const CompanyDirectory = ({
   companies,
+  categories,
   initialQuery,
   heading = 'บริษัททั้งหมด',
   countNoun = 'บริษัท',
@@ -42,10 +44,6 @@ export const CompanyDirectory = ({
   const filtered = useMemo(
     () => companies.filter((c) => matchesFilters(c, filters)),
     [companies, filters],
-  )
-  const categories = useMemo(
-    () => [...new Set(companies.map((c) => c.category))].sort((a, b) => a.localeCompare(b)),
-    [companies],
   )
 
   const directory = useDirectory(filtered, { getSearchFields, sortOptions, initialQuery })
