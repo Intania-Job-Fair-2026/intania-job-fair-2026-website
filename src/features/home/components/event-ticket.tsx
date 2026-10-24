@@ -41,7 +41,7 @@ export const EventTicket = () => {
             <p className="flex w-full items-center justify-center gap-16 whitespace-nowrap">
               <span className={dayClass}>28</span>
               <span className="text-trim font-thai text-2xl font-bold text-ink">ถึง</span>
-              <span className={dayClass}>31</span>
+              <span className={dayClass}>29</span>
             </p>
             <p className="text-trim w-full text-center font-thai-display text-5xl font-bold text-red-500">
               ตุลาคม
