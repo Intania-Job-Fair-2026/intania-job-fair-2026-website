@@ -23,10 +23,10 @@ export const CompanyDirectorySkeleton = () => (
 
     <div
       aria-hidden
-      className="mx-auto flex w-full max-w-lg justify-center gap-1 px-2 min-[375px]:gap-2 min-[375px]:px-4"
+      className="mx-auto flex w-fit max-w-full justify-center gap-1 px-2 min-[375px]:gap-2 sm:px-4"
     >
       <Skeleton className="size-10 shrink-0 rounded-full min-[375px]:size-12" />
-      <div className="flex min-w-0 flex-1 justify-between">
+      <div className="flex min-w-0 justify-center sm:gap-2">
         {Array.from({ length: 7 }, (_, i) => (
           <Skeleton
             key={i}
