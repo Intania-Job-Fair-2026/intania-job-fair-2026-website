@@ -73,9 +73,7 @@ export default async function CompanyDetailPage(props: PageProps<'/companies/[id
         <h2 className="text-trim font-thai text-xl leading-[1.2] font-medium text-ink">
           เกี่ยวกับบริษัท
         </h2>
-        <p
-          className={`${descriptionFont} min-h-24 text-base whitespace-pre-line text-ink-secondary`}
-        >
+        <p className={`${descriptionFont} text-base whitespace-pre-line text-ink-secondary`}>
           {description}
         </p>
       </section>
