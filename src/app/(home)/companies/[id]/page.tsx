@@ -6,7 +6,6 @@ import { CompanyContact } from '@/features/company/components/company-contact'
 import { CompanyLogo } from '@/features/company/components/company-logo'
 import { EventDateBadge } from '@/features/company/components/event-date-badge'
 import { WorkTypeChecklist } from '@/features/company/components/work-type-checklist'
-import { getCompanyLogoUrlByDriveUrl } from '@/lib/image'
 
 export const generateStaticParams = async () => (await getCompanies()).map((c) => ({ id: c.id }))
 
@@ -34,7 +33,7 @@ export default async function CompanyDetailPage(props: PageProps<'/companies/[id
         </div>
 
         <header className="flex w-full flex-col items-center gap-4">
-          <div className="flex w-full items-center gap-4 px-6">
+          <div className="flex min-h-28 w-full items-center gap-4 px-6">
             <div className="shrink-0">
               <CompanyLogo img={company.logo} size={82} />
             </div>
@@ -50,19 +49,23 @@ export default async function CompanyDetailPage(props: PageProps<'/companies/[id
             </div>
           </div>
 
-          {categoryEn && (
-            <p className="mx-6 flex min-h-6 max-w-[calc(100%-48px)] items-center self-start rounded-3xl bg-blue-100 px-3 py-2">
+          {categoryEn ? (
+            <p className="mx-6 flex min-h-9 max-w-[calc(100%-48px)] items-center self-start rounded-3xl bg-blue-100 px-3 py-2">
               <span className="text-trim min-w-0 text-sm leading-[1.4] wrap-anywhere tracking-[0.28px] text-blue-900">
                 <span className="font-display">{categoryEn}</span>
                 {categoryTh && <span className="font-thai"> - {categoryTh}</span>}
               </span>
             </p>
+          ) : (
+            <div aria-hidden className="min-h-9" />
           )}
         </header>
       </div>
 
-      <div className="flex w-full items-center gap-6 px-6">
-        <EventDateBadge days={company.eventDays} />
+      <div className="flex min-h-24 w-full items-center gap-6 px-6">
+        <div className="flex h-22 w-36 shrink-0 items-center">
+          <EventDateBadge days={company.eventDays} />
+        </div>
         <WorkTypeChecklist workTypes={company.workTypes} />
       </div>
 
@@ -70,7 +73,9 @@ export default async function CompanyDetailPage(props: PageProps<'/companies/[id
         <h2 className="text-trim font-thai text-xl leading-[1.2] font-medium text-ink">
           เกี่ยวกับบริษัท
         </h2>
-        <p className={`${descriptionFont} text-base whitespace-pre-line text-ink-secondary`}>
+        <p
+          className={`${descriptionFont} min-h-24 text-base whitespace-pre-line text-ink-secondary`}
+        >
           {description}
         </p>
       </section>

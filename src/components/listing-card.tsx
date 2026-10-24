@@ -2,6 +2,7 @@ import type { LucideIcon } from 'lucide-react'
 import Link from 'next/link'
 import type { ReactNode } from 'react'
 import { cn } from '@/utils/cn'
+import { LinkPendingIndicator } from './link-pending-indicator'
 
 /** Shared building blocks for the booth-directory cards */
 
@@ -18,16 +19,18 @@ export const ListingCard = ({
   const body = cn('flex min-w-0 flex-1 flex-col overflow-clip bg-white p-4', className)
 
   return (
-    <article className="flex w-full items-center drop-shadow-card motion-safe:animate-fade-in">
+    <article className="flex w-full items-center drop-shadow-card">
       {href ? (
         <Link
           href={href}
+          prefetch={true}
           className={cn(
             body,
-            'transition-transform hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-700',
+            'relative transition-transform hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-700',
           )}
         >
           {children}
+          <LinkPendingIndicator />
         </Link>
       ) : (
         <div className={body}>{children}</div>
@@ -57,7 +60,7 @@ export const TagList = ({ tags }: { tags: string[] }) => {
 
 export const InfoRow = ({ icon: Icon, children }: { icon: LucideIcon; children: ReactNode }) => {
   return (
-    <div className="flex w-full items-center gap-1 border-b border-blue-900 pb-1">
+    <div className="flex min-h-7 w-full items-center gap-1 border-b border-blue-900 pb-1">
       <Icon aria-hidden size={16} className="shrink-0 text-ink" />
       <p className="text-trim min-w-0 flex-1 font-thai text-sm leading-[1.4] tracking-[0.28px] text-ink">
         {children}

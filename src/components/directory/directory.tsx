@@ -1,6 +1,6 @@
 'use client'
 
-import { type ReactNode, useEffect, useRef } from 'react'
+import { type ReactNode, useLayoutEffect, useRef } from 'react'
 import { Pagination } from '@/components/pagination'
 import { SearchBar } from '@/components/search-bar'
 import { SortDropdown } from './sort-dropdown'
@@ -38,16 +38,39 @@ export const Directory = ({
   children,
 }: DirectoryProps) => {
   const directoryRef = useRef<HTMLDivElement>(null)
-  const scrollOnPageChange = useRef(false)
+  const requestedPage = useRef<number | null>(null)
 
-  useEffect(() => {
-    if (!scrollOnPageChange.current) return
-    scrollOnPageChange.current = false
-    directoryRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  useLayoutEffect(() => {
+    if (requestedPage.current !== page) return
+    requestedPage.current = null
+
+    const directory = directoryRef.current
+    if (!directory) return
+
+    // Release the bottom button before scrolling, without moving the viewport yet.
+    directory.focus({ preventScroll: true })
+
+    // Start after React commits the new list and the browser settles its scroll range.
+    const frame = requestAnimationFrame(() => {
+      window.scrollTo({
+        top: Math.max(0, window.scrollY + directory.getBoundingClientRect().top),
+        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches
+          ? 'instant'
+          : 'smooth',
+      })
+    })
+
+    return () => cancelAnimationFrame(frame)
   }, [page])
 
   return (
-    <div ref={directoryRef} className="flex w-full flex-col gap-10 pb-4">
+    <div
+      ref={directoryRef}
+      role="region"
+      aria-label={heading}
+      tabIndex={-1}
+      className="flex w-full flex-col gap-10 pb-4 [overflow-anchor:none] focus:outline-none"
+    >
       <SearchBar value={query} onChange={onQueryChange} onFilterClick={onFilterClick} />
 
       <section className="flex w-full flex-col gap-8">
@@ -69,7 +92,7 @@ export const Directory = ({
         totalPages={totalPages}
         onChange={(next) => {
           if (next === page) return
-          scrollOnPageChange.current = true
+          requestedPage.current = next
           onPageChange(next)
         }}
       />
