@@ -8,7 +8,7 @@ export const EventDateBadge = ({ days }: { days: EventDay[] }) => {
   return (
     <div
       className={cn(
-        'flex h-22 shrink-0 flex-col items-center gap-2 overflow-clip rounded-lg bg-white pb-2',
+        'flex h-22 shrink-0 flex-col items-center overflow-clip rounded-lg bg-white pb-2 border border-ink/10',
         days.length > 1 ? 'w-36' : 'w-18',
       )}
     >
@@ -18,7 +18,6 @@ export const EventDateBadge = ({ days }: { days: EventDay[] }) => {
         </span>
       </div>
       <p className="text-trim flex w-full flex-1 items-center justify-center font-heading text-[40px] leading-[1.2] font-bold tracking-[-0.8px] whitespace-nowrap text-red-500">
-        <span className="sr-only">ตุลาคม </span>
         {days.join(' ')}
       </p>
     </div>

@@ -63,7 +63,7 @@ export default async function CompanyDetailPage(props: PageProps<'/companies/[id
       </div>
 
       <div className="flex min-h-24 w-full items-center gap-6 px-6">
-        <div className="flex h-22 w-36 shrink-0 items-center">
+        <div className="flex h-22 w-fit shrink-0 items-center">
           <EventDateBadge days={company.eventDays} />
         </div>
         <WorkTypeChecklist workTypes={company.workTypes} />
@@ -73,9 +73,7 @@ export default async function CompanyDetailPage(props: PageProps<'/companies/[id
         <h2 className="text-trim font-thai text-xl leading-[1.2] font-medium text-ink">
           เกี่ยวกับบริษัท
         </h2>
-        <p
-          className={`${descriptionFont} min-h-24 text-base whitespace-pre-line text-ink-secondary`}
-        >
+        <p className={`${descriptionFont} text-base whitespace-pre-line text-ink-secondary`}>
           {description}
         </p>
       </section>

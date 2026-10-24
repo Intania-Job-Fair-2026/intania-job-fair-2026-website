@@ -1,6 +1,7 @@
 'use client'
 
-import { type ReactNode, useLayoutEffect, useRef } from 'react'
+import { Children, type ReactNode, useLayoutEffect, useRef } from 'react'
+import { ListItemReveal } from '@/components/list-item-reveal'
 import { Pagination } from '@/components/pagination'
 import { SearchBar } from '@/components/search-bar'
 import { SortDropdown } from './sort-dropdown'
@@ -83,7 +84,9 @@ export const Directory = ({
         </div>
 
         <div className="grid w-full grid-cols-1 gap-6 px-6 md:grid-cols-2 lg:grid-cols-3">
-          {children}
+          {Children.map(children, (child, index) => (
+            <ListItemReveal index={index}>{child}</ListItemReveal>
+          ))}
         </div>
       </section>
 

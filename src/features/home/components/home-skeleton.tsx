@@ -9,6 +9,7 @@ export const FeaturedCompaniesSkeleton = () => (
       href="/companies"
       linkLabel="บริษัททั้งหมด"
       buttonLabel="ดูบริษัททั้งหมด"
+      animateItems={false}
     >
       {Array.from({ length: 4 }, (_, i) => (
         <CompanyCardSkeleton key={i} />
