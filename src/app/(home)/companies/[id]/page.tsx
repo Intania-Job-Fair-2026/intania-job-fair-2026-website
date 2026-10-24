@@ -63,7 +63,7 @@ export default async function CompanyDetailPage(props: PageProps<'/companies/[id
       </div>
 
       <div className="flex min-h-24 w-full items-center gap-6 px-6">
-        <div className="flex h-22 w-36 shrink-0 items-center">
+        <div className="flex h-22 w-fit shrink-0 items-center">
           <EventDateBadge days={company.eventDays} />
         </div>
         <WorkTypeChecklist workTypes={company.workTypes} />
