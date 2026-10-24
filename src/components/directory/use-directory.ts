@@ -15,15 +15,14 @@ export type SortOption<T> = {
 type UseDirectoryOptions<T> = {
   getSearchFields: (item: T) => string[]
   sortOptions: SortOption<T>[]
-  initialQuery?: string
 }
 
 export function useDirectory<T>(
   items: T[],
-  { getSearchFields, sortOptions, initialQuery = '' }: UseDirectoryOptions<T>,
+  { getSearchFields, sortOptions }: UseDirectoryOptions<T>,
 ) {
   const searchParams = useSearchParams()
-  const query = searchParams.get('q') ?? initialQuery
+  const query = searchParams.get('q') ?? ''
   const sortBy =
     sortOptions.find((option) => option.id === searchParams.get('sort'))?.id ?? sortOptions[0].id
   const requestedPage = Number(searchParams.get('page') ?? 1)
