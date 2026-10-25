@@ -24,7 +24,6 @@ const defaultSortOptions = [sortByName, sortByCategory, sortByBooth]
 type CompanyDirectoryProps = {
   companies: Company[]
   categories: string[]
-  initialQuery?: string
   heading?: string
   /** Noun in the result count, e.g. "บริษัท" -> "พบ 61 บริษัท" */
   countNoun?: string
@@ -35,7 +34,6 @@ type CompanyDirectoryProps = {
 export const CompanyDirectory = ({
   companies,
   categories,
-  initialQuery,
   heading = 'บริษัททั้งหมด',
   countNoun = 'บริษัท',
   sortOptions = defaultSortOptions,
@@ -60,7 +58,7 @@ export const CompanyDirectory = ({
     [companies, filters],
   )
 
-  const directory = useDirectory(filtered, { getSearchFields, sortOptions, initialQuery })
+  const directory = useDirectory(filtered, { getSearchFields, sortOptions })
 
   return (
     <>

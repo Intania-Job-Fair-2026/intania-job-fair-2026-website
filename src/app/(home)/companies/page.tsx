@@ -8,27 +8,17 @@ export const metadata: Metadata = {
   title: 'บริษัท | Intania Job Fair 2026',
 }
 
-export default function HomeCompaniesPage(props: PageProps<'/companies'>) {
+export default function HomeCompaniesPage() {
   // Keep this fallback local: an ancestor loading.tsx also replaces company details.
   return (
     <Suspense fallback={<CompaniesSkeleton />}>
-      <CompanyResults searchParams={props.searchParams} />
+      <CompanyResults />
     </Suspense>
   )
 }
 
-async function CompanyResults({ searchParams }: Pick<PageProps<'/companies'>, 'searchParams'>) {
-  const [{ q }, companies, categories] = await Promise.all([
-    searchParams,
-    getCompanies(),
-    getCompanyCategories(),
-  ])
+async function CompanyResults() {
+  const [companies, categories] = await Promise.all([getCompanies(), getCompanyCategories()])
 
-  return (
-    <CompanyDirectory
-      companies={companies}
-      categories={categories}
-      initialQuery={typeof q === 'string' ? q : undefined}
-    />
-  )
+  return <CompanyDirectory companies={companies} categories={categories} />
 }

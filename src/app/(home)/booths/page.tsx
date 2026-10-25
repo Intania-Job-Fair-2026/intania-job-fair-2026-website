@@ -10,29 +10,19 @@ export const metadata: Metadata = {
   title: 'บูธ | Intania Job Fair 2026',
 }
 
-export default function HomeBoothsPage(props: PageProps<'/booths'>) {
+export default function HomeBoothsPage() {
   return (
     <>
       <BoothMap header={<BoothMapHeading />} />
       <Suspense fallback={<CompaniesSkeleton />}>
-        <BoothResults searchParams={props.searchParams} />
+        <BoothResults />
       </Suspense>
     </>
   )
 }
 
-async function BoothResults({ searchParams }: Pick<PageProps<'/booths'>, 'searchParams'>) {
-  const [{ q }, companies, categories] = await Promise.all([
-    searchParams,
-    getCompanies(),
-    getCompanyCategories(),
-  ])
+async function BoothResults() {
+  const [companies, categories] = await Promise.all([getCompanies(), getCompanyCategories()])
 
-  return (
-    <BoothDirectory
-      companies={companies}
-      categories={categories}
-      initialQuery={typeof q === 'string' ? q : undefined}
-    />
-  )
+  return <BoothDirectory companies={companies} categories={categories} />
 }
