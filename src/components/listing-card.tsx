@@ -1,4 +1,5 @@
 import type { LucideIcon } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
 import type { ReactNode } from 'react'
 import { cn } from '@/utils/cn'
@@ -78,20 +79,30 @@ export const BoothCode = ({ booths }: { booths: { code: string; day?: string }[]
     <>
       {/* Stretch the divider with taller cards. */}
       <div aria-hidden className="min-h-[136px] w-[3px] shrink-0 self-stretch bg-card-line" />
-      <ul className="flex shrink-0 flex-col items-center gap-3 p-1">
-        {booths.map(({ code, day }) => (
-          <li key={code} className="flex flex-col items-center gap-1.5">
-            {day && (
-              <span className="text-trim font-thai text-xs leading-[1.4] whitespace-nowrap text-ink">
-                วันที่ {day}
+      <div className="flex min-w-16 shrink-0 flex-col gap-3 self-stretch">
+        <ul className="flex flex-col items-center gap-3 p-1">
+          {booths.map(({ code, day }) => (
+            <li key={code} className="flex flex-col items-center gap-1.5">
+              {day && (
+                <span className="text-trim font-thai text-xs leading-[1.4] whitespace-nowrap text-ink">
+                  วันที่ {day}
+                </span>
+              )}
+              <span className="text-trim font-display text-2xl leading-[1.2] font-bold tracking-[3.84px] whitespace-nowrap text-red-900">
+                {code}
               </span>
-            )}
-            <span className="text-trim font-display text-2xl leading-[1.2] font-bold tracking-[3.84px] whitespace-nowrap text-red-900">
-              {code}
-            </span>
-          </li>
-        ))}
-      </ul>
+            </li>
+          ))}
+        </ul>
+        <Image
+          src="/images/company/card-birds.png"
+          alt=""
+          aria-hidden="true"
+          width={64}
+          height={31}
+          className="pointer-events-none mt-auto h-auto w-16 self-end"
+        />
+      </div>
     </>
   )
 }

@@ -30,7 +30,7 @@ export const CompanyCardSkeleton = () => (
             aria-hidden
             className="min-h-[136px] w-[3px] shrink-0 self-stretch bg-card-line/20"
           />
-          <div className="p-1">
+          <div className="min-w-16 p-1">
             <Skeleton tone="card" className="h-8 w-10" />
           </div>
         </>
