@@ -99,7 +99,7 @@ export function Navbar() {
 
   return (
     <nav aria-label="Main navigation" className="w-full fixed bottom-0 max-w-screen">
-      <ul className="flex h-30 w-full gap-6 justify-center items-center bg-white">
+      <ul className="flex h-[var(--navbar-height)] w-full gap-6 justify-center items-center bg-white">
         {items.map((item) => (
           <NavStamp key={item.href} item={item} active={pathname === item.href} />
         ))}

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <main className="mb-30 flex min-h-[calc(100dvh-120px)] w-full flex-1 flex-col bg-red-700 text-white">
+    <main className="mb-(--navbar-height) flex min-h-[calc(100dvh-var(--navbar-height))] w-full flex-1 flex-col bg-red-700 text-white">
       <div className="mx-auto flex w-full max-w-xl flex-col gap-6 pb-8">
         <header className="flex items-center justify-between px-6 pt-6">
           <Link href="/">

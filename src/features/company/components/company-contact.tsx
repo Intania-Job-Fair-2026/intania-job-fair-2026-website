@@ -1,6 +1,7 @@
 'use client'
 
-import { Check, CircleUser, Copy, Mail, Phone } from 'lucide-react'
+import { Check, CircleUser, Copy } from 'lucide-react'
+import Image from 'next/image'
 import { useState } from 'react'
 import { cn } from '@/utils/cn'
 import type { Contact } from '../types'
@@ -13,33 +14,50 @@ export const CompanyContact = ({ contact }: { contact: Contact }) => {
   if (!name && phones.length === 0 && emails.length === 0) return null
 
   return (
-    <section className="flex w-full flex-col gap-5">
-      <h2 className="text-trim px-6 font-thai text-xl leading-[1.2] font-medium text-ink">
+    <section className="flex w-full flex-col gap-6">
+      <h2 className="text-trim font-thai text-xl leading-[1.2] font-medium text-ink">
         ข้อมูลการติดต่อ
       </h2>
 
-      <div className="flex w-full flex-col gap-4 px-6">
+      <div className="flex w-full flex-col gap-4">
         {name && (
           <div className="flex items-center gap-4">
             <CircleUser aria-hidden size={20} strokeWidth={2} className="shrink-0 text-black" />
             <span className="sr-only">ผู้ติดต่อ: </span>
-            <p className={cn('text-trim text-base leading-[1.4] text-ink', contactFont(name))}>
+            <p
+              className={cn(
+                'text-trim min-w-0 text-lg leading-[1.4] wrap-anywhere text-ink',
+                contactFont(name),
+              )}
+            >
               {name}
             </p>
           </div>
         )}
 
         {(phones.length > 0 || emails.length > 0) && (
-          <ul className="flex flex-col gap-3">
+          <ul className="flex flex-col gap-4">
             {phones.map((phone) => (
-              <li key={phone.href + phone.label} className="flex items-center gap-4">
-                <Phone aria-hidden size={20} className="shrink-0 text-ink-secondary" />
+              <li key={phone.href + phone.label} className="flex items-center gap-[17px]">
+                <Image
+                  src="/images/company/phone.svg"
+                  alt=""
+                  width={20}
+                  height={20}
+                  className="shrink-0"
+                />
                 <CopyContactValue value={phone.label} label="เบอร์โทรศัพท์" />
               </li>
             ))}
             {emails.map((email) => (
-              <li key={email} className="flex items-center gap-4">
-                <Mail aria-hidden size={20} className="shrink-0 text-ink-secondary" />
+              <li key={email} className="flex items-center gap-[17px]">
+                <Image
+                  src="/images/company/email.svg"
+                  alt=""
+                  width={20}
+                  height={20}
+                  className="shrink-0"
+                />
                 <CopyContactValue value={email} label="อีเมล" />
               </li>
             ))}
