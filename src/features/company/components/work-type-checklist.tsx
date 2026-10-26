@@ -1,5 +1,4 @@
-import { Check, X } from 'lucide-react'
-import { cn } from '@/utils/cn'
+import Image from 'next/image'
 import type { WorkType } from '../types'
 
 const ITEMS: { type: WorkType; label: string }[] = [
@@ -13,18 +12,16 @@ export const WorkTypeChecklist = ({ workTypes }: { workTypes: WorkType[] }) => (
   <ul className="flex min-w-0 flex-1 flex-col gap-3">
     {ITEMS.map(({ type, label }) => {
       const accepts = workTypes.includes(type)
-      const Icon = accepts ? Check : X
       return (
         <li key={type} className="flex items-center gap-2">
-          <span
+          <Image
             aria-hidden
-            className={cn(
-              'flex size-4 shrink-0 items-center justify-center rounded-full p-0.5 text-white',
-              accepts ? 'bg-success' : 'bg-danger',
-            )}
-          >
-            <Icon size={12} strokeWidth={2} className={cn('translate-x-[0.5px]')} />
-          </span>
+            src={`/images/company/${accepts ? 'accepts' : 'unavailable'}.svg`}
+            alt=""
+            width={16}
+            height={16}
+            className="shrink-0"
+          />
           <span className="text-trim font-thai text-base leading-[1.4] whitespace-nowrap text-ink">
             {accepts ? 'รับ' : 'ไม่รับ'}
             {label}

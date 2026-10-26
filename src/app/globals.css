@@ -1,5 +1,15 @@
 @import 'tailwindcss';
 
+:root {
+  --navbar-height: 120px;
+}
+
+@media (min-width: 48rem) {
+  :root {
+    --navbar-height: 0px;
+  }
+}
+
 @theme inline {
   --font-thai: var(--font-ibm-plex-thai);
   --font-display: var(--font-benguiat);
@@ -28,6 +38,7 @@
   --color-danger: #ff3918;
   /* Figma "white/300" — input and dropdown borders */
   --color-line: #d9d9d9;
+  --color-card-line: #55030e;
 
   --shadow-card: 0 4px 16px 0 rgb(0 0 0 / 0.08);
   --drop-shadow-card: 0 4px 8px rgb(0 0 0 / 0.08);
@@ -53,16 +64,42 @@ body {
 }
 
 @layer components {
-  /* Keep gradient stops independent of result counts, skeletons, and mobile browser chrome. */
+  /* Shared illustrated background for Home, Booths, and the Companies directory. */
   .page-background {
+    isolation: isolate;
+    position: relative;
     background-color: var(--color-blue-300);
-    background-image: linear-gradient(
-      to bottom,
-      var(--color-blue-700),
-      var(--color-accent-primary) 30%,
-      var(--color-blue-300) 70%
-    );
-    background-size: 100% 100svh;
+  }
+
+  .page-background:has([data-page-bg='company']) {
+    background-color: var(--color-blue-50);
+    background-image: none;
+  }
+
+  .page-background::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: url('/images/company/background-texture.png') center bottom / 670px 1456.8px repeat;
+    transform: rotate(180deg);
+  }
+
+  .page-background:has([data-page-bg='company'])::before {
+    opacity: 0.2;
+  }
+
+  .page-background:not(:has([data-page-bg='company']))::before {
+    position: fixed;
+    background-image: url('/images/company/background-no-logo-or-cloud.png');
+    background-position: center 25%;
+    background-size: cover;
     background-repeat: no-repeat;
+    transform: none;
+  }
+
+  .page-background:has([data-page-bg='company']) > footer {
+    padding-block: 48px 0;
   }
 }

@@ -2,8 +2,10 @@ import Image from 'next/image'
 import { ButtonLink } from '@/components/button-link'
 
 // TODO: go to the real registration / evaluation forms once available
-const REGISTER_URL = '#'
-const EVALUATION_URL = '#'
+const REGISTER_URL =
+  'https://docs.google.com/forms/d/e/1FAIpQLSctrZhzDwwrDOB-v7uZXSObYMUyqEI5SsYRYN7SKzsSu37k-Q/viewform'
+const EVALUATION_URL =
+  'https://docs.google.com/forms/d/e/1FAIpQLSeNvM_gCQDPJO1G_CjU7aJ_LCRe03OGthKoxDf0DSl8VLPGEw/viewform'
 
 const timeLabelClass = 'text-trim font-thai text-base leading-[1.4] font-medium'
 const timeValueClass =
@@ -13,59 +15,81 @@ const dayClass =
 
 export const EventTicket = () => {
   return (
-    <div className="mx-auto flex w-full max-w-[480px] flex-col px-6">
-      <section className="relative flex w-full flex-col items-center gap-6 overflow-clip rounded-2xl bg-white pb-8">
-        <p
-          aria-hidden
-          className="text-trim pointer-events-none absolute top-[112px] left-1/2 -translate-x-1/2 font-heading text-[160px] leading-[1.2] font-bold tracking-[-9.6px] whitespace-nowrap text-blue-500 uppercase opacity-10"
-        >
-          2026
-        </p>
-
-        <div className="flex w-full items-center justify-center overflow-clip bg-red-700 px-4 py-3 min-[390px]:px-[43px]">
-          <p className="text-trim text-center font-display text-[clamp(1.125rem,5.6vw,1.5rem)] leading-[1.2] font-bold tracking-[0.16em] whitespace-nowrap text-white">
+    <div className="mx-auto flex w-[402px] max-w-full flex-col px-6">
+      <section className="relative h-[388px] w-full overflow-clip rounded-2xl bg-white">
+        <div className="absolute inset-x-0 top-0 flex h-[42px] items-center justify-center bg-linear-to-r from-red-700 to-red-500">
+          <p className="text-trim text-center font-display text-[clamp(1.125rem,6vw,1.5rem)] leading-[1.2] font-medium tracking-[0.18em] whitespace-nowrap text-white">
             Flight to The Future
           </p>
         </div>
 
-        <h1 className="text-trim relative w-full text-center font-heading text-[clamp(2.25rem,12vw,3rem)] leading-[1.2] font-bold tracking-[-0.06em] text-ink">
+        <h1 className="absolute inset-x-0 top-[57px] text-center font-heading text-[clamp(1.875rem,10vw,2.5rem)] leading-[1.2] font-bold whitespace-nowrap text-black">
           Intania{' '}
-          <span className="-mr-[0.06em] bg-linear-to-b from-red-500 to-red-700 bg-clip-text pr-[0.06em] text-transparent">
+          <span className="bg-linear-to-r from-red-700 to-red-500 bg-clip-text text-transparent">
             Job Fair
           </span>
         </h1>
 
-        <div className="relative flex w-full flex-col items-center gap-2 px-6">
-          <Image src="/images/main/event-flight-path.svg" alt="" width={229} height={44} />
-          <div className="flex w-full flex-col items-center gap-1 leading-[1.2]">
-            <p className="flex w-full items-center justify-center gap-16 whitespace-nowrap">
-              <span className={dayClass}>28</span>
-              <span className="text-trim font-thai text-2xl font-bold text-ink">ถึง</span>
-              <span className={dayClass}>29</span>
-            </p>
-            <p className="text-trim w-full text-center font-thai-display text-5xl font-bold text-red-500">
+        <p
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 top-[82px] text-center font-heading text-[136px] leading-none font-bold tracking-[-4px] whitespace-nowrap text-blue-500 opacity-10"
+        >
+          2026
+        </p>
+
+        <div aria-hidden className="pointer-events-none absolute inset-x-7 top-[124px] h-12">
+          <svg viewBox="0 0 298 48" fill="none" className="h-full w-full">
+            <path
+              d="M48 40 Q149 8 250 40"
+              stroke="var(--color-blue-700)"
+              strokeWidth="3"
+              strokeDasharray="6 6"
+              strokeLinecap="round"
+            />
+          </svg>
+          <Image
+            src="/images/main/ticket-plane-transparent.png"
+            alt=""
+            width={56}
+            height={56}
+            className="absolute top-0 left-1/2 size-14 -translate-x-1/2 rotate-45 object-contain"
+          />
+        </div>
+
+        <div className="absolute inset-x-7 top-[155px] grid grid-cols-3 items-end">
+          <div className="flex flex-col items-center gap-2.5 justify-self-start">
+            <span className={dayClass}>28</span>
+            <span className="text-trim font-thai text-xl leading-[1.4] font-bold text-red-500">
               ตุลาคม
-            </p>
+            </span>
+          </div>
+          <span className="text-trim justify-self-center font-thai text-xl leading-[1.4] font-bold text-black">
+            ถึง
+          </span>
+          <div className="flex flex-col items-center gap-2.5 justify-self-end">
+            <span className={dayClass}>29</span>
+            <span className="text-trim font-thai text-xl leading-[1.4] font-bold text-red-500">
+              ตุลาคม
+            </span>
           </div>
         </div>
 
-        <div className="relative flex w-full flex-col gap-4 px-6 text-ink">
-          <div className="flex w-full items-center justify-between">
-            <div className="flex flex-col gap-2">
-              <p className={timeLabelClass}>ตั้งแต่</p>
-              <p className={timeValueClass}>9:30</p>
-            </div>
-            <div className="flex flex-col gap-2">
-              <p className={timeLabelClass}>จนถึง</p>
-              <p className={timeValueClass}>17:00</p>
-            </div>
+        <div className="absolute inset-x-7 top-[240px] flex items-start justify-between text-black">
+          <div className="flex flex-col gap-2">
+            <p className={timeLabelClass}>ตั้งแต่</p>
+            <p className={timeValueClass}>9:30</p>
           </div>
-          <div className="flex flex-col gap-2 leading-[1.4]">
-            <p className={timeLabelClass}>สถานที่</p>
-            <p className="text-trim font-thai text-[32px] leading-[1.4] font-semibold whitespace-nowrap">
-              ศาลาพระเกี้ยว
-            </p>
+          <div className="flex flex-col gap-2">
+            <p className={timeLabelClass}>จนถึง</p>
+            <p className={timeValueClass}>17:00</p>
           </div>
+        </div>
+
+        <div className="absolute inset-x-7 top-[310px] flex flex-col gap-2 text-black">
+          <p className={timeLabelClass}>สถานที่</p>
+          <p className="text-trim font-thai text-[32px] leading-[1.4] font-bold whitespace-nowrap">
+            ศาลาพระเกี้ยว
+          </p>
         </div>
       </section>
 
@@ -81,10 +105,10 @@ export const EventTicket = () => {
 
       <section className="flex w-full flex-col items-center overflow-clip rounded-2xl bg-white py-8">
         <div className="flex w-full flex-col gap-4 px-6">
-          <ButtonLink href={REGISTER_URL} variant="primary-lg" className="w-full">
+          <ButtonLink href={REGISTER_URL} variant="primary-lg" target="_blank" className="w-full">
             ลงทะเบียน
           </ButtonLink>
-          <ButtonLink href={EVALUATION_URL} variant="outline" className="w-full">
+          <ButtonLink href={EVALUATION_URL} variant="outline" target="_blank" className="w-full">
             แบบประเมินงาน
           </ButtonLink>
         </div>

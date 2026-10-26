@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 export const Footer = () => {
   return (
-    <footer id="contact" className="mt-auto w-full py-18">
+    <footer id="contact" className="mt-auto w-full pt-18">
       <div className="w-full bg-blue-100">
         <div className="mx-auto flex w-full max-w-[402px] items-center justify-between overflow-clip px-6 py-1 md:max-w-3xl lg:max-w-6xl">
           <div className="relative h-8 w-[182px] shrink-0">

@@ -8,7 +8,7 @@ export const EventDateBadge = ({ days }: { days: EventDay[] }) => {
   return (
     <div
       className={cn(
-        'flex h-22 shrink-0 flex-col items-center overflow-clip rounded-lg bg-white pb-2 border border-ink/10',
+        'flex h-22 shrink-0 flex-col items-center overflow-clip rounded-lg border border-ink/10 bg-white pb-2',
         days.length > 1 ? 'w-36' : 'w-18',
       )}
     >
