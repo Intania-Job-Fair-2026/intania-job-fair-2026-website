@@ -96,10 +96,52 @@ function NavStamp({ item, active }: { item: NavItem; active: boolean }) {
 
 export function Navbar() {
   const pathname = usePathname()
+  const activeItem = items.find(
+    (item) => pathname === item.href || (item.href !== '/' && pathname.startsWith(`${item.href}/`)),
+  )
 
   return (
-    <nav aria-label="Main navigation" className="w-full fixed bottom-0 max-w-screen">
-      <ul className="flex h-[var(--navbar-height)] w-full gap-6 justify-center items-center bg-white">
+    <nav aria-label="Main navigation" className="fixed bottom-0 z-50 w-full max-w-screen">
+      <div className="relative h-[var(--navbar-height)] w-full md:hidden">
+        <Image
+          src="/images/navigation/paper.png"
+          alt=""
+          fill
+          sizes="100vw"
+          unoptimized
+          className="pointer-events-none object-fill"
+        />
+        <ul className="relative flex h-full items-center justify-center gap-10 px-3 py-4">
+          {items.map((item) => (
+            <li key={item.href} className="size-22 shrink-0">
+              <Link
+                href={item.href}
+                aria-label={item.label}
+                aria-current={activeItem === item ? 'page' : undefined}
+                className="relative block size-full rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-700"
+              >
+                <Image
+                  src={`/images/navigation/${item.icon}.png`}
+                  alt=""
+                  width={88}
+                  height={88}
+                  className="size-22 object-contain"
+                />
+                {activeItem === item && (
+                  <Image
+                    src="/images/navigation/active.svg"
+                    alt=""
+                    width={64}
+                    height={64}
+                    className="pointer-events-none absolute top-3 left-3"
+                  />
+                )}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <ul className="hidden h-[var(--navbar-height)] w-full items-center justify-center gap-6 bg-white md:flex">
         {items.map((item) => (
           <NavStamp key={item.href} item={item} active={pathname === item.href} />
         ))}
