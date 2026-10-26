@@ -60,7 +60,7 @@ export const TagList = ({ tags }: { tags: string[] }) => {
 
 export const InfoRow = ({ icon: Icon, children }: { icon: LucideIcon; children: ReactNode }) => {
   return (
-    <div className="flex min-h-7 w-full items-center gap-1 border-b border-blue-900 pb-1">
+    <div className="flex min-h-7 w-full items-center gap-1 border-b border-card-line pb-1">
       <Icon aria-hidden size={16} className="shrink-0 text-ink" />
       <p className="text-trim min-w-0 flex-1 font-thai text-sm leading-[1.4] tracking-[0.28px] text-ink">
         {children}
@@ -76,8 +76,8 @@ export const InfoRow = ({ icon: Icon, children }: { icon: LucideIcon; children: 
 export const BoothCode = ({ booths }: { booths: { code: string; day?: string }[] }) => {
   return (
     <>
-      {/* Same 1px blue-900 line as divider-vertical.svg, but stretches with taller cards */}
-      <div aria-hidden className="min-h-[136px] w-px shrink-0 self-stretch bg-blue-900" />
+      {/* Stretch the divider with taller cards. */}
+      <div aria-hidden className="min-h-[136px] w-[3px] shrink-0 self-stretch bg-card-line" />
       <ul className="flex shrink-0 flex-col items-center gap-3 p-1">
         {booths.map(({ code, day }) => (
           <li key={code} className="flex flex-col items-center gap-1.5">

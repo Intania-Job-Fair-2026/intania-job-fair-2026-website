@@ -19,14 +19,17 @@ export const CompanyCardSkeleton = () => (
         </div>
       }
       info={Array.from({ length: 2 }, (_, i) => (
-        <div key={i} className="flex min-h-7 items-center gap-1 border-b border-blue-900/20 pb-1">
+        <div key={i} className="flex min-h-7 items-center gap-1 border-b border-card-line/20 pb-1">
           <Skeleton tone="card" className="size-4 shrink-0" />
           <Skeleton tone="card" className="h-[1.4rem] flex-1" />
         </div>
       ))}
       booths={
         <>
-          <div aria-hidden className="min-h-[136px] w-px shrink-0 self-stretch bg-blue-900/20" />
+          <div
+            aria-hidden
+            className="min-h-[136px] w-[3px] shrink-0 self-stretch bg-card-line/20"
+          />
           <div className="p-1">
             <Skeleton tone="card" className="h-8 w-10" />
           </div>

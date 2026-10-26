@@ -32,6 +32,7 @@
   --color-danger: #ff3918;
   /* Figma "white/300" — input and dropdown borders */
   --color-line: #d9d9d9;
+  --color-card-line: #55030e;
 
   --shadow-card: 0 4px 16px 0 rgb(0 0 0 / 0.08);
   --drop-shadow-card: 0 4px 8px rgb(0 0 0 / 0.08);
@@ -85,7 +86,8 @@ body {
 
   .page-background:not(:has([data-page-bg='company']))::before {
     position: fixed;
-    background-position: center calc(25% + 100px);
+    background-image: url('/images/company/background-no-logo-or-cloud.png');
+    background-position: center 25%;
     background-size: cover;
     background-repeat: no-repeat;
     transform: none;
