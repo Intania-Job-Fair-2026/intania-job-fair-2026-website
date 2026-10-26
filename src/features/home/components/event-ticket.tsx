@@ -2,8 +2,10 @@ import Image from 'next/image'
 import { ButtonLink } from '@/components/button-link'
 
 // TODO: go to the real registration / evaluation forms once available
-const REGISTER_URL = '#'
-const EVALUATION_URL = '#'
+const REGISTER_URL =
+  'https://docs.google.com/forms/d/e/1FAIpQLSctrZhzDwwrDOB-v7uZXSObYMUyqEI5SsYRYN7SKzsSu37k-Q/viewform'
+const EVALUATION_URL =
+  'https://docs.google.com/forms/d/e/1FAIpQLSeNvM_gCQDPJO1G_CjU7aJ_LCRe03OGthKoxDf0DSl8VLPGEw/viewform'
 
 const timeLabelClass = 'text-trim font-thai text-base leading-[1.4] font-medium'
 const timeValueClass =
@@ -81,10 +83,10 @@ export const EventTicket = () => {
 
       <section className="flex w-full flex-col items-center overflow-clip rounded-2xl bg-white py-8">
         <div className="flex w-full flex-col gap-4 px-6">
-          <ButtonLink href={REGISTER_URL} variant="primary-lg" className="w-full">
+          <ButtonLink href={REGISTER_URL} variant="primary-lg" target="_blank" className="w-full">
             ลงทะเบียน
           </ButtonLink>
-          <ButtonLink href={EVALUATION_URL} variant="outline" className="w-full">
+          <ButtonLink href={EVALUATION_URL} variant="outline" target="_blank" className="w-full">
             แบบประเมินงาน
           </ButtonLink>
         </div>

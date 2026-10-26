@@ -28,6 +28,7 @@ type ButtonContentProps = {
 type ButtonLinkProps = ButtonContentProps & {
   href: string
   download?: string
+  target?: string
 }
 
 const buttonClasses = (variant: Variant, className?: string) =>
@@ -77,6 +78,7 @@ export const ButtonLink = ({
   variant = 'primary',
   download,
   className,
+  target = '_self',
   ...content
 }: ButtonLinkProps) => {
   const classes = buttonClasses(variant, className)
@@ -87,7 +89,7 @@ export const ButtonLink = ({
       {label}
     </a>
   ) : (
-    <Link href={href} className={classes}>
+    <Link href={href} className={classes} target={target}>
       {label}
     </Link>
   )
