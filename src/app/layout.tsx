@@ -10,17 +10,20 @@ const ibmPlexSansThai = IBM_Plex_Sans_Thai({
   subsets: ['thai', 'latin'],
 })
 
-// Only the regular / book weights of the brand fonts are available so far; heavier weights
-// (Benguiat Medium Condensed, Helvetica World Bold, FC Iconic Bold) are synthesized by the
-// browser. Add the matching files to each `src` array when they arrive.
 const benguiat = localFont({
-  src: [{ path: '../../public/fonts/ITCBenguiatStdBookCn.otf', weight: '400', style: 'normal' }],
+  src: [
+    { path: '../../public/fonts/ITCBenguiatStdBookCn.otf', weight: '400', style: 'normal' },
+    { path: '../../public/fonts/ITCBenguiatStdMediumCn.otf', weight: '500', style: 'normal' },
+  ],
   variable: '--font-benguiat',
   fallback: ['Georgia', 'serif'],
 })
 
 const helveticaWorld = localFont({
-  src: [{ path: '../../public/fonts/HelveticaWorld-Regular.ttf', weight: '400', style: 'normal' }],
+  src: [
+    { path: '../../public/fonts/HelveticaWorld-Regular.ttf', weight: '400', style: 'normal' },
+    { path: '../../public/fonts/HelveticaWorld-Bold.ttf', weight: '700', style: 'normal' },
+  ],
   variable: '--font-helvetica-world',
   fallback: ['Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],
 })

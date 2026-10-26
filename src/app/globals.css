@@ -4,6 +4,12 @@
   --navbar-height: 120px;
 }
 
+@media (min-width: 48rem) {
+  :root {
+    --navbar-height: 0px;
+  }
+}
+
 @theme inline {
   --font-thai: var(--font-ibm-plex-thai);
   --font-display: var(--font-benguiat);
