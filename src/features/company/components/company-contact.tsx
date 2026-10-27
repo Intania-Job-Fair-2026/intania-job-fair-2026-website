@@ -26,7 +26,7 @@ export const CompanyContact = ({ contact }: { contact: Contact }) => {
             <span className="sr-only">ผู้ติดต่อ: </span>
             <p
               className={cn(
-                'text-trim min-w-0 text-lg leading-[1.4] wrap-anywhere text-ink',
+                'min-w-0 text-base pb-1 break-all text-ink-secondary',
                 contactFont(name),
               )}
             >
